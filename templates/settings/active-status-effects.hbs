@@ -1,0 +1,34 @@
+<form>
+    <div class="effects flexcol active">
+        <ol class="items-list effects-list">
+            <li class="items-header flexrow">
+                <h3 class="item-name effect-name flexrow">Status Effect</h3>
+                <div class="item-controls effect-controls flexrow">
+                    <a class="effect-control" data-action="create" title="Create Status Effect">
+                        <i class="fas fa-plus"></i> Add
+                    </a>
+                </div>
+            </li>
+        </ol>
+        <ol class="items-list effects-list">
+            <ol class="item-list" style="height: 226px">
+                {{#each statusEffects}}
+                <li class="item effect flexrow">
+                    <div class="item-name effect-name flexrow status-efect-divider">
+                        <img class="item-image" src="{{this.icon}}">
+                        <h4>{{localize this.label}}</h4>
+                    </div>
+                    <div class="item-controls effect-controls flexrow">
+                        <a class="effect-control" data-action="edit" title="Edit Status Effect">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a class="effect-control" data-action="delete" title="Delete Status Effect">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </div>
+                </li>
+                {{/each}}
+            </ol>
+        </ol>
+    </div>
+</form>
