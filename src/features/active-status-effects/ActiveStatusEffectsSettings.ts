@@ -1,4 +1,4 @@
-import { i18n, MODULE_CONFIG, template } from "../../config";
+import { modKey, MODULE_CONFIG, template } from "../../config";
 import set from "lodash.set";
 
 type StatusEffects = typeof CONFIG.statusEffects;
@@ -8,7 +8,8 @@ interface Data {
 }
 
 export class ActiveStatusEffectsSettings extends FormApplication<FormApplication.Options, Data> {
-    #statusEffects: typeof CONFIG.statusEffects;
+    private static defaultStatusEffects: StatusEffects;
+    #statusEffects: StatusEffects;
 
     constructor(object?: Data, options?: FormApplication.Options) {
         super(object, options);
@@ -16,21 +17,23 @@ export class ActiveStatusEffectsSettings extends FormApplication<FormApplication
         this.#statusEffects = duplicate(CONFIG.statusEffects);
     }
 
-    public static init(): void {
+    public static init(defaultStatusEffects: StatusEffects): void {
         game.settings.registerMenu(MODULE_CONFIG.NAME, "active-status-effects", {
-            name: i18n("active-status-effects.settings-name"),
-            label: i18n("active-status-effects.settings-label"),
+            name: modKey("active-status-effects.settings-name"),
+            label: modKey("active-status-effects.settings-label"),
             restricted: true,
             type: ActiveStatusEffectsSettings,
             icon: "fas fa-cogs"
         });
+
+        ActiveStatusEffectsSettings.defaultStatusEffects = defaultStatusEffects;
     }
 
     public static get defaultOptions(): FormApplication.Options {
         return {
             ...super.defaultOptions,
             id: `${MODULE_CONFIG.NAME}.active-status-effects.settings`,
-            title: i18n("active-status-effects.config-title"),
+            title: modKey("active-status-effects.config-title"),
             classes: ["active-status-effect-settings"],
             template: template("settings/active-status-effects.hbs"),
             width: 525,
@@ -57,15 +60,20 @@ export class ActiveStatusEffectsSettings extends FormApplication<FormApplication
     public activateListeners(html: JQuery) {
         super.activateListeners(html);
 
-        html.find(".status-effect-control").on("click", (event: JQuery.TriggeredEvent) => this.onEffectControl(event));
-        html.find(".status-effect-name").on("click", this.onToggleEffectSettings.bind(this));
+        html.find(".status-effect-control").on("click", this.onStatusEffectControl.bind(this));
+        html.find(".status-effect-name").on("click", this.onToggleStatusEffectSettings.bind(this));
+        html.find(".status-effects-reset").on("click", this.onReset.bind(this));
     }
 
-    private onEffectControl(event: JQuery.TriggeredEvent<unknown, unknown, HTMLElement>) {
+    private onStatusEffectControl(event: JQuery.TriggeredEvent<unknown, unknown, HTMLElement>) {
         event.preventDefault();
         const button = event.currentTarget;
 
         switch (button.dataset.action) {
+            case "create": {
+                this.createEffect();
+                return;
+            }
             case "delete": {
                 this.deleteEffect(button);
                 return;
@@ -73,7 +81,7 @@ export class ActiveStatusEffectsSettings extends FormApplication<FormApplication
         }
     }
 
-    private onToggleEffectSettings(event: JQuery.TriggeredEvent<unknown, unknown, HTMLElement>) {
+    private onToggleStatusEffectSettings(event: JQuery.TriggeredEvent<unknown, unknown, HTMLElement>) {
         event.preventDefault();
         const toggleLink = event.currentTarget;
         const settings = toggleLink.closest(".status-effect")?.querySelector<HTMLElement>(".status-effect-settings");
@@ -81,6 +89,37 @@ export class ActiveStatusEffectsSettings extends FormApplication<FormApplication
         if (settings) {
             settings.style.display = settings.style.display === "none" ? "block" : "none";
         }
+    }
+
+    private onReset() {
+        const dialog = new Dialog({
+            title: "Reset Defaults",
+            content: "<p>Are you sure you want to discard all changes and reset to the default status effects?</p>",
+            buttons: {
+                ok: {
+                    label: "Ok",
+                    callback: () => {
+                        this.#statusEffects = ActiveStatusEffectsSettings.defaultStatusEffects;
+                        this.render();
+                    }
+                },
+                cancel: {
+                    label: "Cancel"
+                }
+            },
+            default: "cancel"
+        });
+
+        dialog.render(true);
+    }
+
+    private createEffect() {
+        this.#statusEffects.push({
+            id: randomID(),
+            label: "New Effect",
+            icon: "icons/svg/aura.svg"
+        });
+        this.render();
     }
 
     private deleteEffect(eventTarget: HTMLElement) {
@@ -91,15 +130,13 @@ export class ActiveStatusEffectsSettings extends FormApplication<FormApplication
         this.render();
     }
 
-    protected async _updateObject(_event: Event, _formData?: Record<string, unknown>): Promise<void> {
-        if (!_formData) {
+    protected async _updateObject(_event: Event, formData?: Record<string, unknown>): Promise<void> {
+        if (!formData) {
             return;
         }
 
-        const statusEffects: StatusEffects = [];
-        for (const [path, value] of Object.entries(_formData)) {
-            set(statusEffects, path, value);
-        }
+        const statusEffects: StatusEffects = Object.entries(formData)
+            .reduce((statusEffects, [path, value]) => set(statusEffects, path, value), []);
 
         for (const statusEffect of statusEffects) {
             statusEffect.icon = `${statusEffect.icon}#${statusEffect.id}`;

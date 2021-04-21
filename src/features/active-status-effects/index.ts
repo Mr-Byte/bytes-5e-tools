@@ -1,5 +1,5 @@
-import { MODULE_CONFIG } from "../../config";
 import type { Feature } from "../../feature";
+import { MODULE_CONFIG } from "../../config";
 import { ActiveStatusEffectsSettings } from "./ActiveStatusEffectsSettings";
 
 type StatusEffects = typeof CONFIG.statusEffects;
@@ -13,7 +13,7 @@ export class ActiveStatusEffects implements Feature {
         this.registerSettings();
         this.registerHooks();
 
-        ActiveStatusEffectsSettings.init();
+        ActiveStatusEffectsSettings.init(this.#originalStatusEffects);
     }
 
     private registerSettings(): void {
@@ -30,7 +30,6 @@ export class ActiveStatusEffects implements Feature {
 
     public async overrideStatusEffects(): Promise<void> {
         const statusEffects = await game.settings.get(MODULE_CONFIG.NAME, "statusEffects") as StatusEffects | null | undefined;
-
         CONFIG.statusEffects = statusEffects ?? this.#originalStatusEffects;
     }
 }

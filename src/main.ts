@@ -22,11 +22,6 @@ Hooks.once("init", () => {
     registerHandlebarsHelpers();
 });
 
-
 function registerHandlebarsHelpers() {
-    Handlebars.registerHelper("b5e_concat", handlebarsConcat);
-}
-
-function handlebarsConcat(...args: unknown[]) {
-    return args.slice(0, -1).join("");
+    Handlebars.registerHelper("b5e_concat", (...args: unknown[]) => args.slice(0, -1).join(""));
 }
