@@ -44,8 +44,13 @@ export class ActiveStatusEffectsSettings extends FormApplication<FormApplication
     }
 
     public getData(_options?: Application.RenderOptions) {
+        const statusEffects = this.#statusEffects.map(statusEffect => ({
+            ...statusEffect,
+            icon: statusEffect.icon.split("#")[0]
+        }));
+
         return {
-            statusEffects: this.#statusEffects
+            statusEffects
         };
     }
 
@@ -94,6 +99,10 @@ export class ActiveStatusEffectsSettings extends FormApplication<FormApplication
         const statusEffects: StatusEffects = [];
         for (const [path, value] of Object.entries(_formData)) {
             set(statusEffects, path, value);
+        }
+
+        for (const statusEffect of statusEffects) {
+            statusEffect.icon = `${statusEffect.icon}#${statusEffect.id}`;
         }
 
         await game.settings.set(MODULE_CONFIG.NAME, "statusEffects", statusEffects);
