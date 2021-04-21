@@ -2,8 +2,8 @@
   "compilerOptions": {
     "strict": true,
     "target": "ES2020",
-    "module": "ES2020",
-    "lib": ["DOM", "ES6", "ES2017", "ES2018"],
+    "module": "commonjs",
+    "lib": ["DOM", "ES6", "ES2017", "ES2018", "ES2020"],
     "moduleResolution": "node",
     "allowJs": true,
     "outDir": "dist/",
@@ -13,7 +13,9 @@
     "typeRoots": ["node_modules/@types", "src/types"],
     "types": ["@league-of-foundry-developers/foundry-vtt-types"],
     "newLine": "lf",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "esModuleInterop": true
   },
   "exclude": ["dist/**/*.js"],
   "include": ["src/**/*.ts"]

@@ -13,9 +13,8 @@
       "path": "lang/en.json"
     }
   ],
-  "esmodules": ["dist/main.js"],
+  "scripts": ["dist/mod.js"],
   "templates": ["templates/settings/active-status-effects.hbs"],
-  "styles": ["styles/active-status-effects-settings.css"],
   "url": "https://github.com/Mr-Byte/bytes-5e-tools",
   "manifest": "https://raw.githubusercontent.com/Mr-Byte/bytes-5e-tools/main/module.json",
   "bugs": "https://github.com/Mr-Byte/bytes-5e-tools/issues",

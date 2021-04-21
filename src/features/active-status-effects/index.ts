@@ -1,6 +1,6 @@
-import { MODULE_CONFIG } from "../../config.js";
-import type { Feature } from "../../feature.js";
-import { ActiveStatusEffectsSettings } from "./ActiveStatusEffectsSettings.js";
+import { MODULE_CONFIG } from "../../config";
+import type { Feature } from "../../feature";
+import { ActiveStatusEffectsSettings } from "./ActiveStatusEffectsSettings";
 
 type StatusEffects = typeof CONFIG.statusEffects;
 
@@ -34,4 +34,3 @@ export class ActiveStatusEffects implements Feature {
         CONFIG.statusEffects = statusEffects ?? this.#originalStatusEffects;
     }
 }
-

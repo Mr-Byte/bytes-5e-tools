@@ -1,34 +1,58 @@
-<form>
-    <div class="effects flexcol active">
-        <ol class="items-list effects-list">
-            <li class="items-header flexrow">
-                <h3 class="item-name effect-name flexrow">Status Effect</h3>
-                <div class="item-controls effect-controls flexrow">
-                    <a class="effect-control" data-action="create" title="Create Status Effect">
-                        <i class="fas fa-plus"></i> Add
+<form autocomplete="off">
+
+    <div class="container-grid">
+        <header>
+            <h2>Status Effects</h2>
+        </header>
+
+        <div class="status-effects-container">
+            {{#each statusEffects}}
+            <div class="status-effect" data-effect-id="{{this.id}}">
+                <img class="status-effect-icon" src="{{this.icon}}">
+
+                <div class="status-effect-name">
+                    <a>
+                        <h3>{{localize this.label}}</h3>
                     </a>
                 </div>
-            </li>
-        </ol>
-        <ol class="items-list effects-list">
-            <ol class="item-list" style="height: 226px">
-                {{#each statusEffects}}
-                <li class="item effect flexrow">
-                    <div class="item-name effect-name flexrow status-efect-divider">
-                        <img class="item-image" src="{{this.icon}}">
-                        <h4>{{localize this.label}}</h4>
+
+                <div class="status-effect-controls">
+                    <a class="status-effect-control" data-action="delete" title="Delete Status Effect">
+                        <i class="fas fa-trash"></i> </a>
+
+                </div>
+
+                <div class="status-effect-settings" style="display: none">
+                    <div>
+                        <input type="hidden" name="[{{@index}}].id" value="{{this.id}}" />
+                        <div class="form-group">
+                            <label for="[{{@index}}].label">Status Effect Label</label>
+                            <div class="form-fields">
+                                <input type="text" name="[{{@index}}].label" value="{{localize this.label}}" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="[{{@index}}].icon">Status Effect Icon</label>
+                            <div class="form-fields">
+                                {{filePicker target=(b5e_concat "[" @index "].icon") type="imagevideo"}}
+                                <input type="text" name="[{{@index}}].icon" id="[{{@index}}].icon"
+                                    value="{{this.icon}}" />
+                            </div>
+                        </div>
                     </div>
-                    <div class="item-controls effect-controls flexrow">
-                        <a class="effect-control" data-action="edit" title="Edit Status Effect">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                        <a class="effect-control" data-action="delete" title="Delete Status Effect">
-                            <i class="fas fa-trash"></i>
-                        </a>
-                    </div>
-                </li>
-                {{/each}}
-            </ol>
-        </ol>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+
+        <footer>
+            <button type="submit" name="submit">
+                <i class="far fa-save"></i> Save Changes
+            </button>
+
+            <button type="button" name="reset">
+                <i class="fas fa-undo"></i> Reset Defaults
+            </button>
+        </footer>
     </div>
 </form>

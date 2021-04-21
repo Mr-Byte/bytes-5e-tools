@@ -4,14 +4,24 @@
   "description": "Various helpful tools to make playing 5e easier in Foundry.",
   "license": "MIT",
   "scripts": {
-    "build": "rimraf ./dist && tsc"
+    "build": "eslint && webpack"
   },
-  "dependencies": {
+  "devDependencies": {
     "@league-of-foundry-developers/foundry-vtt-types": "^0.7.9-6",
+    "@types/lodash.set": "^4.3.6",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
+    "css-loader": "^5.2.4",
     "eslint": "^7.24.0",
-    "rimraf": "^3.0.2",
-    "typescript": "^4.2.4"
+    "less": "^4.1.1",
+    "less-loader": "^8.1.1",
+    "style-loader": "^2.0.0",
+    "ts-loader": "^9.0.0",
+    "typescript": "^4.2.4",
+    "webpack": "^5.33.2",
+    "webpack-cli": "^4.6.0"
+  },
+  "dependencies": {
+    "lodash.set": "^4.3.2"
   }
 }

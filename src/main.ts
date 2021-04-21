@@ -1,6 +1,8 @@
-import type { Feature, FeatureStatic } from "./feature.js";
-import { ActiveStatusEffects } from "./features/active-status-effects/index.js";
-import { TokenHoverDisplay } from "./features/token-hover-display/index.js";
+import "../styles/active-status-effects-settings.less";
+
+import type { Feature, FeatureStatic } from "./feature";
+import { ActiveStatusEffects } from "./features/active-status-effects";
+import { TokenHoverDisplay } from "./features/token-hover-display";
 
 const AVAILABLE_FEATURES: FeatureStatic[] = [
     ActiveStatusEffects,
@@ -16,4 +18,15 @@ Hooks.once("init", () => {
 
         ENABLED_FEATURES.push(activeFeature);
     }
+
+    registerHandlebarsHelpers();
 });
+
+
+function registerHandlebarsHelpers() {
+    Handlebars.registerHelper("b5e_concat", handlebarsConcat);
+}
+
+function handlebarsConcat(...args: unknown[]) {
+    return args.slice(0, -1).join("");
+}
