@@ -3,6 +3,7 @@ import { MODULE_CONFIG } from "../../config";
 import { ActiveStatusEffectsSettings } from "./ActiveStatusEffectsSettings";
 
 type StatusEffects = typeof CONFIG.statusEffects;
+type StatusEffect = StatusEffects[0];
 
 export class ActiveStatusEffects implements Feature {
     #originalStatusEffects!: StatusEffects;
@@ -26,6 +27,9 @@ export class ActiveStatusEffects implements Feature {
 
     private registerHooks(): void {
         Hooks.on("ready", () => void this.overrideStatusEffects());
+        Hooks.on("preCreateActiveEffect", (_: unknown, effect: StatusEffect) => {
+            effect.icon = effect.icon.split("#")[0];
+        });
     }
 
     public async overrideStatusEffects(): Promise<void> {
