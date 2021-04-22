@@ -1,12 +1,12 @@
 import type { Feature } from "../../feature";
+
 import { MODULE_CONFIG } from "../../config";
 import { ActiveStatusEffectsSettings } from "./ActiveStatusEffectsSettings";
 
-type StatusEffects = typeof CONFIG.statusEffects;
-type StatusEffect = StatusEffects[0];
+export type StatusEffect = typeof CONFIG.statusEffects[0];
 
 export class ActiveStatusEffects implements Feature {
-    #originalStatusEffects!: StatusEffects;
+    #originalStatusEffects!: StatusEffect[];
 
     public init(): void {
         this.#originalStatusEffects = CONFIG.statusEffects;
@@ -28,12 +28,12 @@ export class ActiveStatusEffects implements Feature {
     private registerHooks(): void {
         Hooks.on("ready", () => void this.overrideStatusEffects());
         Hooks.on("preCreateActiveEffect", (_: unknown, effect: StatusEffect) => {
-            effect.icon = effect.icon.split("#")[0];
+            [effect.icon] = effect.icon.split("#");
         });
     }
 
     public async overrideStatusEffects(): Promise<void> {
-        const statusEffects = await game.settings.get(MODULE_CONFIG.NAME, "statusEffects") as StatusEffects | null | undefined;
+        const statusEffects = await game.settings.get(MODULE_CONFIG.NAME, "statusEffects") as StatusEffect[] | null | undefined;
         CONFIG.statusEffects = statusEffects ?? this.#originalStatusEffects;
     }
 }

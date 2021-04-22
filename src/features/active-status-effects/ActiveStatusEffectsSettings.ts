@@ -1,15 +1,17 @@
+import type { StatusEffect } from ".";
+
 import { modKey, MODULE_CONFIG, template } from "../../config";
 import set from "lodash.set";
 
-type StatusEffects = typeof CONFIG.statusEffects;
-
 interface Data {
-    statusEffects: StatusEffects;
+    statusEffects: StatusEffect[];
 }
 
+type TriggeredEvent = JQuery.TriggeredEvent<unknown, unknown, HTMLElement>;
+
 export class ActiveStatusEffectsSettings extends FormApplication<FormApplication.Options, Data> {
-    private static defaultStatusEffects: StatusEffects;
-    #statusEffects: StatusEffects;
+    private static defaultStatusEffects: StatusEffect[];
+    #statusEffects: StatusEffect[];
 
     constructor(object?: Data, options?: FormApplication.Options) {
         super(object, options);
@@ -17,7 +19,7 @@ export class ActiveStatusEffectsSettings extends FormApplication<FormApplication
         this.#statusEffects = duplicate(CONFIG.statusEffects);
     }
 
-    public static init(defaultStatusEffects: StatusEffects): void {
+    public static init(defaultStatusEffects: StatusEffect[]): void {
         game.settings.registerMenu(MODULE_CONFIG.NAME, "active-status-effects", {
             name: modKey("active-status-effects.settings-name"),
             label: modKey("active-status-effects.settings-label"),
@@ -57,15 +59,36 @@ export class ActiveStatusEffectsSettings extends FormApplication<FormApplication
         };
     }
 
+    protected async _updateObject(_event: Event, formData?: Record<string, unknown>): Promise<void> {
+        if (!formData) {
+            return;
+        }
+
+        const statusEffects: StatusEffect[] = Object.entries(formData)
+            .reduce(
+                (statusEffects, [path, value]) => path.startsWith("#")
+                    ? statusEffects
+                    : set(statusEffects, path, value),
+                []
+            );
+
+        for (const statusEffect of statusEffects) {
+            statusEffect.icon = `${statusEffect.icon}#${statusEffect.id}`;
+        }
+
+        await game.settings.set(MODULE_CONFIG.NAME, "statusEffects", statusEffects);
+    }
+
     public activateListeners(html: JQuery) {
         super.activateListeners(html);
 
-        html.find(".status-effect-control").on("click", this.onStatusEffectControl.bind(this));
-        html.find(".status-effect-name").on("click", this.onToggleStatusEffectSettings.bind(this));
-        html.find(".status-effects-reset").on("click", this.onReset.bind(this));
+        html.find(".status-effect-control").on("click", this.onStatusEffectControlClick.bind(this));
+        html.find(".status-effect-name").on("click", this.onStatusEffectSettingsToggleClick.bind(this));
+        html.find(".status-effects-reset").on("click", this.onStatusEffectsResetClick.bind(this));
+        html.find(".status-effect-tab").on("click", this.onTabClick.bind(this));
     }
 
-    private onStatusEffectControl(event: JQuery.TriggeredEvent<unknown, unknown, HTMLElement>) {
+    private onStatusEffectControlClick(event: TriggeredEvent) {
         event.preventDefault();
         const button = event.currentTarget;
 
@@ -79,38 +102,6 @@ export class ActiveStatusEffectsSettings extends FormApplication<FormApplication
                 return;
             }
         }
-    }
-
-    private onToggleStatusEffectSettings(event: JQuery.TriggeredEvent<unknown, unknown, HTMLElement>) {
-        event.preventDefault();
-        const toggleLink = event.currentTarget;
-        const settings = toggleLink.closest(".status-effect")?.querySelector<HTMLElement>(".status-effect-settings");
-
-        if (settings) {
-            settings.style.display = settings.style.display === "none" ? "block" : "none";
-        }
-    }
-
-    private onReset() {
-        const dialog = new Dialog({
-            title: "Reset Defaults",
-            content: "<p>Are you sure you want to discard all changes and reset to the default status effects?</p>",
-            buttons: {
-                ok: {
-                    label: "Ok",
-                    callback: () => {
-                        this.#statusEffects = ActiveStatusEffectsSettings.defaultStatusEffects;
-                        this.render();
-                    }
-                },
-                cancel: {
-                    label: "Cancel"
-                }
-            },
-            default: "cancel"
-        });
-
-        dialog.render(true);
     }
 
     private createEffect() {
@@ -130,18 +121,39 @@ export class ActiveStatusEffectsSettings extends FormApplication<FormApplication
         this.render();
     }
 
-    protected async _updateObject(_event: Event, formData?: Record<string, unknown>): Promise<void> {
-        if (!formData) {
-            return;
+    private onStatusEffectSettingsToggleClick(event: TriggeredEvent) {
+        event.preventDefault();
+        const toggleLink = event.currentTarget;
+        const settings = toggleLink.closest(".status-effect")?.querySelector<HTMLElement>(".status-effect-settings");
+
+        if (settings) {
+            settings.style.display = settings.style.display === "none" ? "block" : "none";
         }
+    }
 
-        const statusEffects: StatusEffects = Object.entries(formData)
-            .reduce((statusEffects, [path, value]) => set(statusEffects, path, value), []);
+    private onStatusEffectsResetClick() {
+        const dialog = new Dialog({
+            title: "Reset Defaults",
+            content: "<p>Are you sure you want to discard all changes and reset to the default status effects?</p>",
+            buttons: {
+                ok: {
+                    label: "Ok",
+                    callback: () => {
+                        this.#statusEffects = duplicate(ActiveStatusEffectsSettings.defaultStatusEffects);
+                        this.render();
+                    }
+                },
+                cancel: {
+                    label: "Cancel"
+                }
+            },
+            default: "cancel"
+        });
 
-        for (const statusEffect of statusEffects) {
-            statusEffect.icon = `${statusEffect.icon}#${statusEffect.id}`;
-        }
+        dialog.render(true);
+    }
 
-        await game.settings.set(MODULE_CONFIG.NAME, "statusEffects", statusEffects);
+    private onTabClick(_event: TriggeredEvent) {
+        //
     }
 }
