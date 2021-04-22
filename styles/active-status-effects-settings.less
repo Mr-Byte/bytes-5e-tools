@@ -47,6 +47,8 @@
         border-bottom: 1px solid #c9c7b8;
         column-gap: 4px;
         row-gap: 4px;
+        padding-top: 4px;
+        overflow: hidden;
 
         .status-effect-icon {
           border: none;
@@ -74,7 +76,17 @@
 
         .status-effect-settings {
           grid-column: 1 / span 3;
-          padding: 4px;
+          padding: 0px;
+
+          &[data-visibility="hidden"] {
+            max-height: 0px;
+            transition: max-height 1s linear 0s;
+          }
+
+          &[data-visibility="shown"] {
+            max-height: 1000px;
+            transition: max-height 1s linear 0s;
+          }
 
           div.tabs {
             display: grid;

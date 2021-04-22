@@ -127,7 +127,7 @@ export class ActiveStatusEffectsSettings extends FormApplication<FormApplication
         const settings = toggleLink.closest(".status-effect")?.querySelector<HTMLElement>(".status-effect-settings");
 
         if (settings) {
-            settings.style.display = settings.style.display === "none" ? "block" : "none";
+            settings.dataset.visibility = settings.dataset.visibility === "hidden" ? "shown" : "hidden";
         }
     }
 
