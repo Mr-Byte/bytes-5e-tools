@@ -85,7 +85,6 @@ export class ActiveStatusEffectsSettings extends FormApplication<FormApplication
         html.find(".status-effect-control").on("click", this.onStatusEffectControlClick.bind(this));
         html.find(".status-effect-name").on("click", this.onStatusEffectSettingsToggleClick.bind(this));
         html.find(".status-effects-reset").on("click", this.onStatusEffectsResetClick.bind(this));
-        html.find(".status-effect-tab").on("click", this.onTabClick.bind(this));
     }
 
     private onStatusEffectControlClick(event: TriggeredEvent) {
@@ -127,7 +126,14 @@ export class ActiveStatusEffectsSettings extends FormApplication<FormApplication
         const settings = toggleLink.closest(".status-effect")?.querySelector<HTMLElement>(".status-effect-settings");
 
         if (settings) {
-            settings.dataset.visibility = settings.dataset.visibility === "hidden" ? "shown" : "hidden";
+            const isHidden = settings.dataset.visibility === "hidden";
+
+            if (isHidden) {
+                settings.dataset.visibility = "shown";
+                toggleLink.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+            } else {
+                settings.dataset.visibility = "hidden";
+            }
         }
     }
 
@@ -151,9 +157,5 @@ export class ActiveStatusEffectsSettings extends FormApplication<FormApplication
         });
 
         dialog.render(true);
-    }
-
-    private onTabClick(_event: TriggeredEvent) {
-        //
     }
 }
