@@ -12,7 +12,7 @@ export interface StatusEffectProps {
 
 export default function StatusEffect({ id, label, icon, index }: StatusEffectProps) {
     const [showDetails, setShowDetails] = useState(false);
-    const [statusEffectLabel] = useState(localize(label));
+    const [statusEffectLabel, setStatusEffectLabel] = useState(localize(label));
     const [statusEffectIcon, setStatusEffectIcon] = useState(icon);
     const toggleDetails = () => setShowDetails(!showDetails);
 
@@ -34,7 +34,12 @@ export default function StatusEffect({ id, label, icon, index }: StatusEffectPro
                     <div className="form-group">
                         <label htmlFor={`[${index}].label`}>Status Effect Label</label>
                         <div className="form-fields">
-                            <input name={`[${index}].label`} type="text" value={statusEffectLabel}></input>
+                            <input
+                                name={`[${index}].label`}
+                                type="text"
+                                value={statusEffectLabel}
+                                onChange={event => setStatusEffectLabel(event.target.value)}
+                            />
                         </div>
                     </div>
 

@@ -18,7 +18,7 @@ export default function ({ id, type, value, onChange }: FilePickerProps) {
         const current = inputRef.current;
         if (current) {
             current.onchange = (event: Event) => {
-                const newFile = (event.currentTarget as HTMLInputElement)?.value ?? "";
+                const newFile = (event.target as HTMLInputElement)?.value ?? "";
                 setFile(newFile);
                 onChange?.(newFile);
             }
