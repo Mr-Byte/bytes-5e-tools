@@ -8,9 +8,10 @@ export interface StatusEffectProps {
     label: string;
     icon: string;
     index: number;
+    onDeleteStatusEffect?: (_index: number) => void;
 }
 
-export default function StatusEffect({ id, label, icon, index }: StatusEffectProps) {
+export default function StatusEffect({ id, label, icon, index, onDeleteStatusEffect }: StatusEffectProps) {
     const [showDetails, setShowDetails] = useState(false);
     const [statusEffectLabel, setStatusEffectLabel] = useState(localize(label));
     const [statusEffectIcon, setStatusEffectIcon] = useState(icon);
@@ -23,7 +24,7 @@ export default function StatusEffect({ id, label, icon, index }: StatusEffectPro
                 <h3>{localize(label)}</h3>
             </div>
             <div className="status-effect-controls">
-                <a title="Delete Status Effect">
+                <a title="Delete Status Effect" onClick={() => onDeleteStatusEffect?.(index)}>
                     <Icon icon="fa-trash" />
                 </a>
             </div>

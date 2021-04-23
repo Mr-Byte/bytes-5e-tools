@@ -23,7 +23,7 @@ export default function ({ id, type, value, onChange }: FilePickerProps) {
                 onChange?.(newFile);
             }
         }
-    });
+    }, [inputRef]);
 
     useEffect(() => {
         const current = buttonRef.current;
@@ -32,7 +32,7 @@ export default function ({ id, type, value, onChange }: FilePickerProps) {
             const filePicker = FilePicker.fromButton(current);
             current.onclick = () => filePicker.browse();
         }
-    });
+    }, [buttonRef]);
 
     return (
         <>

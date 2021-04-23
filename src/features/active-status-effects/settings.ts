@@ -6,13 +6,6 @@ import View, { Props } from "../../components/active-status-effects-settings/Vie
 
 export class ActiveStatusEffectsSettings extends ReactFormApplication<Props> {
     private static defaultStatusEffects: StatusEffect[];
-    #statusEffects: StatusEffect[];
-
-    constructor(object?: Data, options?: FormApplication.Options) {
-        super(object, options);
-
-        this.#statusEffects = duplicate(CONFIG.statusEffects);
-    }
 
     public static init(defaultStatusEffects: StatusEffect[]): void {
         game.settings.registerMenu(MODULE_CONFIG.NAME, "active-status-effects", {
@@ -66,7 +59,7 @@ export class ActiveStatusEffectsSettings extends ReactFormApplication<Props> {
     }
 
     getData() {
-        const statusEffects = this.#statusEffects.map(statusEffect => ({
+        const statusEffects = duplicate(CONFIG.statusEffects).map(statusEffect => ({
             ...statusEffect,
             icon: statusEffect.icon.split("#")[0]
         }));
@@ -76,56 +69,6 @@ export class ActiveStatusEffectsSettings extends ReactFormApplication<Props> {
             defaultStatusEffects: ActiveStatusEffectsSettings.defaultStatusEffects
         };
     }
-
-    // private onStatusEffectControlClick(event: TriggeredEvent) {
-    //     event.preventDefault();
-    //     const button = event.currentTarget;
-
-    //     switch (button.dataset.action) {
-    //         case "create": {
-    //             this.createEffect();
-    //             return;
-    //         }
-    //         case "delete": {
-    //             this.deleteEffect(button);
-    //             return;
-    //         }
-    //     }
-    // }
-
-    // private createEffect() {
-    //     this.#statusEffects.push({
-    //         id: randomID(),
-    //         label: "New Effect",
-    //         icon: "icons/svg/aura.svg"
-    //     });
-    //     this.render();
-    // }
-
-    // private deleteEffect(eventTarget: HTMLElement) {
-    //     const statusEffectContainer = eventTarget.closest<HTMLElement>(".status-effect");
-    //     const effectId = statusEffectContainer?.dataset.effectId;
-
-    //     this.#statusEffects = this.#statusEffects.filter(effect => effect.id !== effectId);
-    //     this.render();
-    // }
-
-    // private onStatusEffectSettingsToggleClick(event: TriggeredEvent) {
-    //     event.preventDefault();
-    //     const toggleLink = event.currentTarget;
-    //     const settings = toggleLink.closest(".status-effect")?.querySelector<HTMLElement>(".status-effect-settings");
-
-    //     if (settings) {
-    //         const isHidden = settings.dataset.visibility === "hidden";
-
-    //         if (isHidden) {
-    //             settings.dataset.visibility = "shown";
-    //             toggleLink.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
-    //         } else {
-    //             settings.dataset.visibility = "hidden";
-    //         }
-    //     }
-    // }
 
     // private onStatusEffectsResetClick() {
     //     const dialog = new Dialog({
