@@ -2,7 +2,7 @@
   "compilerOptions": {
     "strict": true,
     "target": "ES2020",
-    "module": "commonjs",
+    "module": "esnext",
     "lib": ["DOM", "ES6", "ES2017", "ES2018", "ES2020"],
     "moduleResolution": "node",
     "allowJs": true,
@@ -14,9 +14,9 @@
     "types": ["@league-of-foundry-developers/foundry-vtt-types"],
     "newLine": "lf",
     "skipLibCheck": true,
-    "sourceMap": true,
-    "esModuleInterop": true
+    // "esModuleInterop": true,
+    "jsx": "react-jsx"
   },
   "exclude": ["dist/**/*.js"],
-  "include": ["src/**/*.ts"]
+  "include": ["src/**/*.ts", "src/**/*.tsx"]
 }

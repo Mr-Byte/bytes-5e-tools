@@ -1,71 +1,59 @@
 <form autocomplete="off">
+    <div id="container" class="container-grid"></div>
+</form>
 
-    <div class="container-grid">
-        <header>
-            <h2>Status Effects</h2>
-            <a class="status-effect-control" data-action="create" title="Create Status Effect">
-                <h2><i class="fas fa-plus"></i>Add</h2>
-            </a>
-        </header>
+{{!-- <div class="container-grid">
 
-        <div class="status-effects-container">
-            {{#each statusEffects}}
-            <div class="status-effect" data-effect-id="{{this.id}}">
-                <img class="status-effect-icon" src="{{this.icon}}">
 
-                <div class="status-effect-name">
-                    <a>
-                        <h3>{{localize this.label}}</h3>
-                    </a>
-                </div>
+    <div class="status-effects-container">
+        {{#each statusEffects}}
+        <div class="status-effect" data-effect-id="{{this.id}}">
+            <img class="status-effect-icon" src="{{this.icon}}">
 
-                <div class="status-effect-controls">
-                    <a class="status-effect-control" data-action="delete" title="Delete Status Effect">
-                        <i class="fas fa-trash"></i>
-                    </a>
-                </div>
+            <div class="status-effect-name">
+                <a>
+                    <h3>{{localize this.label}}</h3>
+                </a>
+            </div>
 
-                <div class="status-effect-settings" data-visibility="hidden">
-                    <div class="tabs">
-                        <input class="selector" name="#group-{{@index}}" type="radio" id="tab-{{@index}}-1" checked />
-                        <label class="label" for="tab-{{@index}}-1"><i class="fas fa-book"></i> Details</label>
-                        <div class="panel">
-                            <input type="hidden" name="[{{@index}}].id" value="{{this.id}}" />
-                            <div class="form-group">
-                                <label for="[{{@index}}].label">Status Effect Label</label>
-                                <div class="form-fields">
-                                    <input type="text" name="[{{@index}}].label" value="{{localize this.label}}" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="[{{@index}}].icon">Status Effect Icon</label>
-                                <div class="form-fields">
-                                    {{filePicker target=(b5e_concat "[" @index "].icon") type="imagevideo"}}
-                                    <input type="text" name="[{{@index}}].icon" id="[{{@index}}].icon"
-                                        value="{{this.icon}}" />
-                                </div>
+            <div class="status-effect-controls">
+                <a class="status-effect-control" data-action="delete" title="Delete Status Effect">
+                    <i class="fas fa-trash"></i>
+                </a>
+            </div>
+
+            <div class="status-effect-settings" data-visibility="hidden">
+                <div class="tabs">
+                    <input class="selector" name="#group-{{@index}}" type="radio" id="tab-{{@index}}-1" checked />
+                    <label class="label" for="tab-{{@index}}-1"><i class="fas fa-book"></i> Details</label>
+                    <div class="panel">
+                        <input type="hidden" name="[{{@index}}].id" value="{{this.id}}" />
+                        <div class="form-group">
+                            <label for="[{{@index}}].label">Status Effect Label</label>
+                            <div class="form-fields">
+                                <input type="text" name="[{{@index}}].label" value="{{localize this.label}}" />
                             </div>
                         </div>
-
-                        <input class="selector" name="#group-{{@index}}" type="radio" id="tab-{{@index}}-2" />
-                        <label class="label" for="tab-{{@index}}-2"><i class="fas fa-cogs"></i> Effects</label>
-                        <div class="panel">
-                            feenHEY
+                        <div class="form-group">
+                            <label for="[{{@index}}].icon">Status Effect Icon</label>
+                            <div class="form-fields">
+                                {{filePicker target=(b5e_concat "[" @index "].icon") type="imagevideo"}}
+                                <input type="text" name="[{{@index}}].icon" id="[{{@index}}].icon"
+                                    value="{{this.icon}}" />
+                            </div>
                         </div>
+                    </div>
+
+                    <input class="selector" name="#group-{{@index}}" type="radio" id="tab-{{@index}}-2" />
+                    <label class="label" for="tab-{{@index}}-2"><i class="fas fa-cogs"></i> Effects</label>
+                    <div class="panel">
+                        feenHEY
                     </div>
                 </div>
             </div>
-            {{/each}}
         </div>
-
-        <footer>
-            <button type="submit" name="submit">
-                <i class="far fa-save"></i> Save Changes
-            </button>
-
-            <button type="button" name="reset" class="status-effects-reset">
-                <i class="fas fa-undo"></i> Reset Defaults
-            </button>
-        </footer>
+        {{/each}}
     </div>
-</form>
+
+
+</div> --}}

@@ -1,9 +1,7 @@
-import type { Feature } from "../../feature";
-
+import { ActiveStatusEffectsSettings } from "./settings";
+import { Feature } from "../../feature";
 import { MODULE_CONFIG } from "../../config";
-import { ActiveStatusEffectsSettings } from "./ActiveStatusEffectsSettings";
-
-export type StatusEffect = typeof CONFIG.statusEffects[0];
+import { StatusEffect } from "./types";
 
 export class ActiveStatusEffects implements Feature {
     #originalStatusEffects!: StatusEffect[];

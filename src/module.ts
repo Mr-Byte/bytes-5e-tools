@@ -1,12 +1,10 @@
-import "../styles/active-status-effects-settings.less";
-
 import type { Feature, FeatureStatic } from "./feature";
 import { ActiveStatusEffects } from "./features/active-status-effects";
-import { TokenHoverDisplay } from "./features/token-hover-display";
+// import { TokenHoverDisplay } from "./features/token-hover-display/index";
 
 const AVAILABLE_FEATURES: FeatureStatic[] = [
     ActiveStatusEffects,
-    TokenHoverDisplay
+    // TokenHoverDisplay
 ];
 const ENABLED_FEATURES: Feature[] = [];
 
@@ -18,10 +16,4 @@ Hooks.once("init", () => {
 
         ENABLED_FEATURES.push(activeFeature);
     }
-
-    registerHandlebarsHelpers();
 });
-
-function registerHandlebarsHelpers() {
-    Handlebars.registerHelper("b5e_concat", (...args: unknown[]) => args.slice(0, -1).join(""));
-}

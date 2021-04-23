@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-    entry: './src/main.ts',
+    entry: './src/module.ts',
     devtool: 'inline-source-map',
     mode: 'production',
     module: {
@@ -14,6 +14,7 @@ module.exports = {
             {
                 test: /\.less$/,
                 exclude: /node_modules/,
+                sideEffects: true,
                 use: [
                     {
                         loader: "style-loader",
@@ -34,7 +35,7 @@ module.exports = {
         ],
     },
     resolve: {
-        extensions: ['.ts', '.js'],
+        extensions: ['.ts', '.tsx', '.js'],
     },
     output: {
         filename: 'mod.js',
