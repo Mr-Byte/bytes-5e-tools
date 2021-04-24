@@ -1,5 +1,8 @@
 {
   "bytes-5e-tools.active-status-effects.config-title": "Manage Active Status Effects",
   "bytes-5e-tools.active-status-effects.settings-name": "Active Status Effects",
-  "bytes-5e-tools.active-status-effects.settings-label": "Manage Status Effects"
+  "bytes-5e-tools.active-status-effects.settings-label": "Manage Status Effects",
+
+  "bytes-5e-tools.save-changes-label": "Save Changes",
+  "bytes-5e-tools.reset-defaults-label": "Reset Defaults"
 }

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import FilePicker from "../../ui/FilePicker";
-import { localize } from "../../ui/util";
+import { useTranslation } from "../../ui/hooks";
 import Icon from "../common/Icon";
 
 export interface StatusEffectProps {
@@ -13,7 +13,7 @@ export interface StatusEffectProps {
 
 export default function StatusEffect({ id, label, icon, index, onDeleteStatusEffect }: StatusEffectProps) {
     const [showDetails, setShowDetails] = useState(false);
-    const [statusEffectLabel, setStatusEffectLabel] = useState(localize(label));
+    const [statusEffectLabel, setStatusEffectLabel] = useState(useTranslation(label));
     const [statusEffectIcon, setStatusEffectIcon] = useState(icon);
     const toggleDetails = () => setShowDetails(!showDetails);
 
@@ -21,7 +21,7 @@ export default function StatusEffect({ id, label, icon, index, onDeleteStatusEff
         <div className="status-effect">
             <img className="status-effect-icon" src={statusEffectIcon} onClick={toggleDetails} />
             <div className="status-effect-name" onClick={toggleDetails}>
-                <h3>{localize(label)}</h3>
+                <h3>{statusEffectLabel}</h3>
             </div>
             <div className="status-effect-controls">
                 <a title="Delete Status Effect" onClick={() => onDeleteStatusEffect?.(index)}>

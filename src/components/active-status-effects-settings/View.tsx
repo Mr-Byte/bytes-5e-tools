@@ -1,11 +1,10 @@
 import "./style.less";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
 import StatusEffectItem from "./StatusEffectItem";
 import { StatusEffect } from "../../features/active-status-effects/types";
-import { usePrevious } from "../../ui/util";
 
 export interface Props {
     statusEffects: StatusEffect[];
@@ -14,19 +13,24 @@ export interface Props {
 
 export default function View(props: Props) {
     const [statusEffects, setStatusEffects] = useState(props.statusEffects);
-    const previousStatusEffects = usePrevious(statusEffects);
     const statusEffectsContainerRef = useRef<HTMLDivElement>(null);
+    const scrollToEndRef = useRef(false);
 
     useEffect(() => {
-        const previousLength = previousStatusEffects?.length ?? statusEffects.length;
+        if (scrollToEndRef.current) {
+            const current = statusEffectsContainerRef.current;
 
-        if (statusEffects.length > previousLength) {
-            statusEffectsContainerRef.current?.scrollTo({ top: statusEffectsContainerRef.current?.scrollHeight, behavior: "smooth" });
+            current?.scrollTo({
+                top: current?.scrollHeight,
+                behavior: "smooth"
+            });
+
+            scrollToEndRef.current = false;
         }
-    }, [statusEffects]);
+    }, [scrollToEndRef.current]);
 
     const onAddStatusEffect = () => {
-        setStatusEffects([
+        setStatusEffects((statusEffects) => [
             ...statusEffects,
             {
                 id: randomID(),
@@ -34,11 +38,39 @@ export default function View(props: Props) {
                 icon: "icons/svg/aura.svg"
             }
         ]);
+
+        scrollToEndRef.current = true;
     };
 
     const onDeleteStatusEffect = (index: number) => {
-        setStatusEffects(statusEffects.filter((_, i) => i !== index));
+        setStatusEffects(statusEffects => statusEffects.filter((_, i) => i !== index));
     };
+
+    const resetEffects = useCallback(() => {
+        // Minor hack to force refresh the list of effects even if the count didn't change.
+        setStatusEffects(() => []);
+        setStatusEffects(() => duplicate(props.defaultStatusEffects));
+    }, []);
+
+    const onResetStatusEffects = () => {
+        // TODO: Can this be a hook of some sort?
+        const dialog = new Dialog({
+            title: "Reset Defaults",
+            content: "<p>Are you sure you want to discard all changes and reset to the default status effects?</p>",
+            buttons: {
+                ok: {
+                    label: "Ok",
+                    callback: resetEffects
+                },
+                cancel: {
+                    label: "Cancel"
+                }
+            },
+            default: "cancel"
+        });
+
+        dialog.render(true);
+    }
 
     return (
         <div className="active-status-effect-settings">
@@ -58,7 +90,7 @@ export default function View(props: Props) {
                 <div style={{ height: "10px" }}></div>
             </div>
 
-            <Footer />
+            <Footer onResetStatusEffects={onResetStatusEffects} />
         </div>
     );
 }

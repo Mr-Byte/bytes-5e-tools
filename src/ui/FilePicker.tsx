@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { localize } from './util';
+import { localize } from './localization';
 
 interface FilePickerProps {
     id: string;
@@ -23,7 +23,7 @@ export default function ({ id, type, value, onChange }: FilePickerProps) {
                 onChange?.(newFile);
             }
         }
-    }, [inputRef]);
+    }, [inputRef, onChange]);
 
     useEffect(() => {
         const current = buttonRef.current;

@@ -10,11 +10,12 @@ export interface ButtonProps {
     name?: string;
     icon?: string;
     children?: React.ReactNode;
+    onClick?: () => void;
 }
 
-export default function Button({ type, name, icon, children }: ButtonProps) {
+export default function Button({ type, name, icon, children, onClick }: ButtonProps) {
     return (
-        <button type={type} name={name}>
+        <button type={type} name={name} onClick={onClick}>
             <Label icon={icon}>
                 {children}
             </Label>

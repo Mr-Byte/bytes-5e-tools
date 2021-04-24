@@ -27,7 +27,7 @@ export class ActiveStatusEffectsSettings extends ReactFormApplication<Props> {
             width: 525,
             height: 400,
             editable: true,
-            resizable: true,
+            resizable: false,
             submitOnChange: false,
             submitOnClose: false,
             closeOnSubmit: true,
@@ -69,26 +69,4 @@ export class ActiveStatusEffectsSettings extends ReactFormApplication<Props> {
             defaultStatusEffects: ActiveStatusEffectsSettings.defaultStatusEffects
         };
     }
-
-    // private onStatusEffectsResetClick() {
-    //     const dialog = new Dialog({
-    //         title: "Reset Defaults",
-    //         content: "<p>Are you sure you want to discard all changes and reset to the default status effects?</p>",
-    //         buttons: {
-    //             ok: {
-    //                 label: "Ok",
-    //                 callback: () => {
-    //                     this.#statusEffects = duplicate(ActiveStatusEffectsSettings.defaultStatusEffects);
-    //                     this.render();
-    //                 }
-    //             },
-    //             cancel: {
-    //                 label: "Cancel"
-    //             }
-    //         },
-    //         default: "cancel"
-    //     });
-
-    //     dialog.render(true);
-    // }
 }
