@@ -5,6 +5,7 @@ import { StatusEffect } from "../../types";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { StatusEffectItem } from "./StatusEffectItem";
+import { cloneDeep } from "lodash-es";
 
 export interface SettingsFormProps {
     statusEffects: StatusEffect[];
@@ -49,7 +50,7 @@ export function SettingsForm(props: SettingsFormProps) {
     const resetEffects = useCallback(() => {
         // Minor hack to force refresh the list of effects even if the count didn't change.
         setStatusEffects(() => []);
-        setStatusEffects(() => duplicate(props.defaultStatusEffects));
+        setStatusEffects(() => cloneDeep(props.defaultStatusEffects));
     }, []);
 
     const onResetStatusEffects = () => {

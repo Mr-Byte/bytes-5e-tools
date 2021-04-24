@@ -1,5 +1,5 @@
 import type { StatusEffect } from "../types";
-import { set } from "lodash-es";
+import { cloneDeep, memoize, set } from "lodash-es";
 import { MODULE_CONFIG, modKey } from "../../../config";
 import { SettingsForm, SettingsFormProps } from "./components/StatusEffectSettingsForm";
 import { ReactFormApplication } from "../../../common/components";
@@ -34,7 +34,7 @@ export class ActiveStatusEffectsSettings extends ReactFormApplication<SettingsFo
         };
     }
 
-    protected get reactElement() {
+    get component() {
         return SettingsForm;
     }
 
@@ -58,15 +58,17 @@ export class ActiveStatusEffectsSettings extends ReactFormApplication<SettingsFo
         await game.settings.set(MODULE_CONFIG.NAME, "statusEffects", statusEffects);
     }
 
-    getData() {
-        const statusEffects = duplicate(CONFIG.statusEffects).map(statusEffect => ({
-            ...statusEffect,
-            icon: statusEffect.icon.split("#")[0]
-        }));
-
+    static convertStatusEffects = memoize((statusEffects: StatusEffect[]) => {
         return {
-            statusEffects,
+            statusEffects: cloneDeep(statusEffects).map(statusEffect => ({
+                ...statusEffect,
+                icon: statusEffect.icon.split("#")[0]
+            })),
             defaultStatusEffects: ActiveStatusEffectsSettings.defaultStatusEffects
         };
+    });
+
+    getData() {
+        return ActiveStatusEffectsSettings.convertStatusEffects(CONFIG.statusEffects)
     }
 }

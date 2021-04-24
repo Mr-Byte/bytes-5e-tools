@@ -12,7 +12,6 @@
   "devDependencies": {
     "@league-of-foundry-developers/foundry-vtt-types": "^0.7.9-6",
     "@types/lodash-es": "^4.17.4",
-    "@types/lodash.set": "^4.3.6",
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.3",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
@@ -29,8 +28,6 @@
     "webpack-cli": "^4.6.0"
   },
   "dependencies": {
-    "-": "0.0.1",
-    "D": "^1.0.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "lodash-es": "^4.17.21",
     "react": "^17.0.2",
