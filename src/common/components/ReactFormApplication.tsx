@@ -1,4 +1,4 @@
-import { template } from "../config";
+import { template } from "../../config";
 import { render } from "react-dom";
 
 export abstract class ReactFormApplication<TProps extends object> extends FormApplication<FormApplication.Options, TProps> {

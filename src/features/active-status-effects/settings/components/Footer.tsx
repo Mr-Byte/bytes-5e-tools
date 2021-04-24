@@ -1,12 +1,12 @@
-import { modKey } from "../../config";
-import { useTranslation } from "../../ui/hooks";
-import Button, { ButtonType } from "../common/Button";
+import { modKey } from "../../../../config";
+import { useTranslation } from "../../../../common/hooks";
+import { Button, ButtonType } from "../../../../common/components";
 
-interface FooterProps {
+export interface FooterProps {
     onResetStatusEffects?: () => void;
 }
 
-export default function Footer({ onResetStatusEffects }: FooterProps) {
+export function Footer({ onResetStatusEffects }: FooterProps) {
     const saveChangesLabel = useTranslation(modKey("save-changes-label"));
     const resetDefaultsLabel = useTranslation(modKey("reset-defaults-label"));
 

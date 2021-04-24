@@ -1,17 +1,17 @@
 import "./style.less";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import Footer from "./Footer";
-import Header from "./Header";
-import StatusEffectItem from "./StatusEffectItem";
-import { StatusEffect } from "../../features/active-status-effects/types";
+import { StatusEffect } from "../../types";
+import { Header } from "./Header";
+import { Footer } from "./Footer";
+import { StatusEffectItem } from "./StatusEffectItem";
 
-export interface Props {
+export interface SettingsFormProps {
     statusEffects: StatusEffect[];
     defaultStatusEffects: StatusEffect[];
 }
 
-export default function View(props: Props) {
+export function SettingsForm(props: SettingsFormProps) {
     const [statusEffects, setStatusEffects] = useState(props.statusEffects);
     const statusEffectsContainerRef = useRef<HTMLDivElement>(null);
     const scrollToEndRef = useRef(false);

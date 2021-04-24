@@ -1,7 +1,6 @@
 import { useState } from "react";
-import FilePicker from "../../ui/FilePicker";
-import { useTranslation } from "../../ui/hooks";
-import Icon from "../common/Icon";
+import { useTranslation } from "../../../../common/hooks";
+import { Icon, FilePicker } from "../../../../common/components";
 
 export interface StatusEffectProps {
     id: string;
@@ -11,7 +10,7 @@ export interface StatusEffectProps {
     onDeleteStatusEffect?: (_index: number) => void;
 }
 
-export default function StatusEffect({ id, label, icon, index, onDeleteStatusEffect }: StatusEffectProps) {
+export function StatusEffectItem({ id, label, icon, index, onDeleteStatusEffect }: StatusEffectProps) {
     const [showDetails, setShowDetails] = useState(false);
     const [statusEffectLabel, setStatusEffectLabel] = useState(useTranslation(label));
     const [statusEffectIcon, setStatusEffectIcon] = useState(icon);
@@ -47,7 +46,7 @@ export default function StatusEffect({ id, label, icon, index, onDeleteStatusEff
                     <div className="form-group">
                         <label htmlFor={`[${index}].icon`}>Status Effect Icon</label>
                         <div className="form-fields">
-                            <FilePicker id={`[${index}].icon`} type="image" value={icon} onChange={setStatusEffectIcon}></FilePicker>
+                            <FilePicker id={`[${index}].icon`} type="image" value={icon} onChange={setStatusEffectIcon} />
                         </div>
                     </div>
                 </div>

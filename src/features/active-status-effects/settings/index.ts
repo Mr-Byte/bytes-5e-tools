@@ -1,10 +1,10 @@
-import type { StatusEffect } from "./types";
+import type { StatusEffect } from "../types";
 import { set } from "lodash-es";
-import { MODULE_CONFIG, modKey } from "../../config";
-import { ReactFormApplication } from "../../ui/ReactFormApplication";
-import View, { Props } from "../../components/active-status-effects-settings/View";
+import { MODULE_CONFIG, modKey } from "../../../config";
+import { SettingsForm, SettingsFormProps } from "./components/StatusEffectSettingsForm";
+import { ReactFormApplication } from "../../../common/components";
 
-export class ActiveStatusEffectsSettings extends ReactFormApplication<Props> {
+export class ActiveStatusEffectsSettings extends ReactFormApplication<SettingsFormProps> {
     private static defaultStatusEffects: StatusEffect[];
 
     public static init(defaultStatusEffects: StatusEffect[]): void {
@@ -22,7 +22,7 @@ export class ActiveStatusEffectsSettings extends ReactFormApplication<Props> {
     public static get defaultOptions(): FormApplication.Options {
         return {
             ...super.defaultOptions,
-            id: `${MODULE_CONFIG.NAME}.active-status-effects.settings`,
+            id: modKey("active-status-effects.settings"),
             title: modKey("active-status-effects.config-title"),
             width: 525,
             height: 400,
@@ -35,7 +35,7 @@ export class ActiveStatusEffectsSettings extends ReactFormApplication<Props> {
     }
 
     protected get reactElement() {
-        return View;
+        return SettingsForm;
     }
 
     protected async _updateObject(_event: Event, formData?: Record<string, unknown>): Promise<void> {

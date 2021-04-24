@@ -1,10 +1,10 @@
-import Label from "../common/Label";
+import Label from "../../../../common/components/Label";
 
-interface HeaderProps {
+export interface HeaderProps {
     onAddStatusEffect?: () => void;
 }
 
-export default function Header({ onAddStatusEffect }: HeaderProps) {
+export function Header({ onAddStatusEffect }: HeaderProps) {
     return (
         <header>
             <h2>Status Effects</h2>

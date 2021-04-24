@@ -13,7 +13,7 @@ export interface ButtonProps {
     onClick?: () => void;
 }
 
-export default function Button({ type, name, icon, children, onClick }: ButtonProps) {
+export function Button({ type, name, icon, children, onClick }: ButtonProps) {
     return (
         <button type={type} name={name} onClick={onClick}>
             <Label icon={icon}>
