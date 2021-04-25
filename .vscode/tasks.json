@@ -1,13 +1,12 @@
 {
-  "version": "2.0.0",
   "tasks": [
     {
       "type": "npm",
       "script": "build",
-      "problemMatcher": ["$tsc"],
+      "problemMatcher": ["$tsc", "$eslint-compact"],
       "group": "build",
       "label": "npm: build",
-      "detail": "rimraf ./dist && tsc"
+      "detail": "eslint && webpack"
     }
   ]
 }

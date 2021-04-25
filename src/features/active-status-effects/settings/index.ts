@@ -45,9 +45,7 @@ export class ActiveStatusEffectsSettings extends ReactFormApplication<SettingsFo
 
         const statusEffects: StatusEffect[] = Object.entries(formData)
             .reduce(
-                (statusEffects, [path, value]) => path.startsWith("#")
-                    ? statusEffects
-                    : set(statusEffects, path, value),
+                (statusEffects, [path, value]) => set(statusEffects, path, value),
                 []
             );
 
@@ -58,7 +56,7 @@ export class ActiveStatusEffectsSettings extends ReactFormApplication<SettingsFo
         await game.settings.set(MODULE_CONFIG.NAME, "statusEffects", statusEffects);
     }
 
-    static convertStatusEffects = memoize((statusEffects: StatusEffect[]) => {
+    static convertStatusEffects = memoize((statusEffects: StatusEffect[]): SettingsFormProps => {
         return {
             statusEffects: cloneDeep(statusEffects).map(statusEffect => ({
                 ...statusEffect,
