@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "../../../../common/hooks";
 import { Icon, FilePicker } from "../../../../common/components";
+import { modKey } from "../../../../config";
 
 export interface StatusEffectProps {
     id: string;
@@ -12,8 +13,12 @@ export interface StatusEffectProps {
 
 export function StatusEffectItem({ id, label, icon, index, onDeleteStatusEffect }: StatusEffectProps) {
     const [showDetails, setShowDetails] = useState(false);
-    const [statusEffectLabel, setStatusEffectLabel] = useState(useTranslation(label));
     const [statusEffectIcon, setStatusEffectIcon] = useState(icon);
+    const [statusEffectLabel, setStatusEffectLabel] = useState(useTranslation(label));
+
+    const statusEffectItemLabel = useTranslation(modKey("active-status-effects.settings.label.status-effect-label"));
+    const statusEffectItemIcon = useTranslation(modKey("active-status-effects.settings.label.status-effect-icon"));
+
     const toggleDetails = () => setShowDetails(!showDetails);
 
     return (
@@ -32,7 +37,7 @@ export function StatusEffectItem({ id, label, icon, index, onDeleteStatusEffect 
                 <div>
                     <input type="hidden" name={`[${index}].id`} value={id} />
                     <div className="form-group">
-                        <label htmlFor={`[${index}].label`}>Status Effect Label</label>
+                        <label htmlFor={`[${index}].label`}>{statusEffectItemLabel}</label>
                         <div className="form-fields">
                             <input
                                 name={`[${index}].label`}
@@ -44,7 +49,7 @@ export function StatusEffectItem({ id, label, icon, index, onDeleteStatusEffect 
                     </div>
 
                     <div className="form-group">
-                        <label htmlFor={`[${index}].icon`}>Status Effect Icon</label>
+                        <label htmlFor={`[${index}].icon`}>{statusEffectItemIcon}</label>
                         <div className="form-fields">
                             <FilePicker id={`[${index}].icon`} type="image" value={icon} onChange={setStatusEffectIcon} />
                         </div>

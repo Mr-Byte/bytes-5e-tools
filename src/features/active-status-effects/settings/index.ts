@@ -9,8 +9,8 @@ export class ActiveStatusEffectsSettings extends ReactFormApplication<SettingsFo
 
     public static init(defaultStatusEffects: StatusEffect[]): void {
         game.settings.registerMenu(MODULE_CONFIG.NAME, "active-status-effects", {
-            name: modKey("active-status-effects.settings-name"),
-            label: modKey("active-status-effects.settings-label"),
+            name: modKey("active-status-effects.settings.name"),
+            label: modKey("active-status-effects.settings.label.manage"),
             restricted: true,
             type: ActiveStatusEffectsSettings,
             icon: "fas fa-cogs"
@@ -23,7 +23,7 @@ export class ActiveStatusEffectsSettings extends ReactFormApplication<SettingsFo
         return {
             ...super.defaultOptions,
             id: modKey("active-status-effects.settings"),
-            title: modKey("active-status-effects.config-title"),
+            title: modKey("active-status-effects.settings.title"),
             width: 525,
             height: 400,
             editable: true,

@@ -7,8 +7,8 @@ export interface FooterProps {
 }
 
 export function Footer({ onResetStatusEffects }: FooterProps) {
-    const saveChangesLabel = useTranslation(modKey("save-changes-label"));
-    const resetDefaultsLabel = useTranslation(modKey("reset-defaults-label"));
+    const saveChangesLabel = useTranslation(modKey("label.save-changes"));
+    const resetDefaultsLabel = useTranslation(modKey("label.reset-defaults"));
 
     return (
         <footer>

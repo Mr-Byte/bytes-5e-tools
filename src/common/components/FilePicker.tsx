@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { localize } from '../localization';
 import * as foundry from "../foundry";
+import { useTranslation } from '../hooks';
 
 export interface FilePickerProps {
     id: string;
@@ -10,7 +11,7 @@ export interface FilePickerProps {
 }
 
 export function FilePicker({ id, type, value, onChange }: FilePickerProps) {
-    const [tooltip] = useState(localize("FILES.BrowseTooltip"));
+    const tooltip = useTranslation(localize("FILES.BrowseTooltip"));
     const [file, setFile] = useState(value);
     const inputRef = useRef<HTMLInputElement>(null);
     const buttonRef = useRef<HTMLButtonElement>(null);

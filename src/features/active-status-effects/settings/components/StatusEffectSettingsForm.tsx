@@ -6,6 +6,8 @@ import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { StatusEffectItem } from "./StatusEffectItem";
 import { cloneDeep } from "lodash-es";
+import { useTranslation } from "../../../../common/hooks";
+import { modKey } from "../../../../config";
 
 export interface SettingsFormProps {
     statusEffects: StatusEffect[];
@@ -16,6 +18,12 @@ export function SettingsForm(props: SettingsFormProps) {
     const [statusEffects, setStatusEffects] = useState(props.statusEffects);
     const statusEffectsContainerRef = useRef<HTMLDivElement>(null);
     const scrollToEndRef = useRef(false);
+
+    const resetDefaultsLabel = useTranslation(modKey("label.reset-defaults"));
+    const resetWarningText = useTranslation(modKey("active-status-effects.settings.reset-warning"));
+    const newEffectLabel = useTranslation(modKey("active-status-effects.settings.label.status-effect-new"));
+    const okLabel = useTranslation(modKey("label.ok"));
+    const cancelLabel = useTranslation(modKey("label.cancel"));
 
     useEffect(() => {
         if (scrollToEndRef.current) {
@@ -35,7 +43,7 @@ export function SettingsForm(props: SettingsFormProps) {
             ...statusEffects,
             {
                 id: randomID(),
-                label: "New Effect",
+                label: newEffectLabel,
                 icon: "icons/svg/aura.svg"
             }
         ]);
@@ -56,15 +64,15 @@ export function SettingsForm(props: SettingsFormProps) {
     const onResetStatusEffects = () => {
         // TODO: Can this be a hook of some sort?
         const dialog = new Dialog({
-            title: "Reset Defaults",
-            content: "<p>Are you sure you want to discard all changes and reset to the default status effects?</p>",
+            title: resetDefaultsLabel,
+            content: resetWarningText,
             buttons: {
                 ok: {
-                    label: "Ok",
+                    label: okLabel,
                     callback: resetEffects
                 },
                 cancel: {
-                    label: "Cancel"
+                    label: cancelLabel
                 }
             },
             default: "cancel"
