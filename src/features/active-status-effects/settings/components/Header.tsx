@@ -14,7 +14,7 @@ export function Header({ onAddStatusEffect }: HeaderProps) {
     return (
         <header>
             <h2>{headerLabel}</h2>
-            <a className="status-effect-control" title={createStatusEffectLabel} onClick={onAddStatusEffect}>
+            <a className="b5e:status-effect-control" title={createStatusEffectLabel} onClick={onAddStatusEffect}>
                 <h2>
                     <Label icon="fa-plus">{addButonLabel}</Label>
                 </h2>

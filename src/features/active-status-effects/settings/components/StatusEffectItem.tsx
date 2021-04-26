@@ -22,18 +22,18 @@ export function StatusEffectItem({ id, label, icon, index, onDeleteStatusEffect 
     const toggleDetails = () => setShowDetails(!showDetails);
 
     return (
-        <div className="status-effect">
-            <img className="status-effect-icon" src={statusEffectIcon} onClick={toggleDetails} />
-            <div className="status-effect-name" onClick={toggleDetails}>
+        <div className="b5e:status-effect">
+            <img className="b5e:status-effect-icon" src={statusEffectIcon} onClick={toggleDetails} />
+            <div className="b5e:status-effect-name" onClick={toggleDetails}>
                 <h3>{statusEffectLabel}</h3>
             </div>
-            <div className="status-effect-controls">
+            <div className="b5e:status-effect-controls">
                 <a title="Delete Status Effect" onClick={() => onDeleteStatusEffect?.(index)}>
                     <Icon icon="fa-trash" />
                 </a>
             </div>
 
-            <div className="status-effect-settings" data-visibility={showDetails ? "shown" : "hidden"}>
+            <div className="b5e:status-effect-settings" data-visibility={showDetails ? "shown" : "hidden"}>
                 <div>
                     <input type="hidden" name={`[${index}].id`} value={id} />
                     <div className="form-group">

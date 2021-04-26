@@ -1,6 +1,6 @@
 import "./style.less";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { StatusEffect } from "../../types";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
@@ -15,7 +15,7 @@ export interface SettingsFormProps {
 }
 
 export function SettingsForm(props: SettingsFormProps) {
-    const [statusEffects, setStatusEffects] = useState(props.statusEffects);
+    const [statusEffects, setStatusEffects] = useState(keyElements(props.statusEffects));
     const statusEffectsContainerRef = useRef<HTMLDivElement>(null);
     const scrollToEndRef = useRef(false);
 
@@ -36,7 +36,7 @@ export function SettingsForm(props: SettingsFormProps) {
 
             scrollToEndRef.current = false;
         }
-    }, [scrollToEndRef.current]);
+    });
 
     const onAddStatusEffect = () => {
         setStatusEffects((statusEffects) => [
@@ -44,7 +44,8 @@ export function SettingsForm(props: SettingsFormProps) {
             {
                 id: randomID(),
                 label: newEffectLabel,
-                icon: "icons/svg/aura.svg"
+                icon: "icons/svg/aura.svg",
+                key: randomID()
             }
         ]);
 
@@ -55,12 +56,6 @@ export function SettingsForm(props: SettingsFormProps) {
         setStatusEffects(statusEffects => statusEffects.filter((_, i) => i !== index));
     };
 
-    const resetEffects = useCallback(() => {
-        // Minor hack to force refresh the list of effects even if the count didn't change.
-        setStatusEffects(() => []);
-        setStatusEffects(() => cloneDeep(props.defaultStatusEffects));
-    }, []);
-
     const onResetStatusEffects = () => {
         // TODO: Can this be a hook of some sort?
         const dialog = new Dialog({
@@ -69,7 +64,9 @@ export function SettingsForm(props: SettingsFormProps) {
             buttons: {
                 ok: {
                     label: okLabel,
-                    callback: resetEffects
+                    callback: () => {
+                        setStatusEffects(keyElements(cloneDeep(props.defaultStatusEffects)));
+                    }
                 },
                 cancel: {
                     label: cancelLabel
@@ -82,16 +79,16 @@ export function SettingsForm(props: SettingsFormProps) {
     }
 
     return (
-        <div className="active-status-effect-settings">
+        <div className="b5e:active-status-effect-settings">
             <Header onAddStatusEffect={onAddStatusEffect} />
 
-            <div className="status-effects-container" ref={statusEffectsContainerRef}>
+            <div className="b5e:status-effects-container" ref={statusEffectsContainerRef}>
                 {
                     // @ts-ignore For whatever reason, this is broken in TS 4.1
                     statusEffects.map((statusEffect, index) =>
                         <StatusEffectItem {...statusEffect}
                             index={index}
-                            key={statusEffect.id}
+                            key={statusEffect.key}
                             onDeleteStatusEffect={onDeleteStatusEffect}
                         />
                     )
@@ -102,4 +99,8 @@ export function SettingsForm(props: SettingsFormProps) {
             <Footer onResetStatusEffects={onResetStatusEffects} />
         </div>
     );
+}
+
+function keyElements<T>(input: T[]): (T & { key: string })[] {
+    return input.map(item => ({ ...item, key: randomID() }));
 }
