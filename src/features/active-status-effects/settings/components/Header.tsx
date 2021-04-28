@@ -1,4 +1,4 @@
-import Label from "../../../../common/components/Label";
+import { Label } from "../../../../common/components";
 import { useTranslation } from "../../../../common/hooks";
 import { modKey } from "../../../../config";
 

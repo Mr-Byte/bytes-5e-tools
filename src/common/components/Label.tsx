@@ -1,14 +1,23 @@
+import React from "react";
 import { Icon } from "./Icon";
 
 export interface LabelProps {
     icon?: string;
     children?: React.ReactNode;
+    className?: string;
+    onClick?: () => void;
 }
 
-export default function Label({ icon, children }: LabelProps) {
+export function Label({ icon, children, ...rest }: LabelProps) {
     return (
-        <>
-            {icon ? <Icon icon={icon} /> : null}{children}
-        </>
+        <span {...rest}>
+            {
+                icon
+                    ? <>
+                        <Icon icon={icon} />&nbsp;{children}
+                    </>
+                    : { children }
+            }
+        </span>
     );
 }

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "../../../../common/hooks";
-import { Icon, FilePicker } from "../../../../common/components";
+import { Icon, FilePicker, TabSet, Tab } from "../../../../common/components";
 import { modKey } from "../../../../config";
 
 export interface StatusEffectProps {
@@ -34,27 +34,34 @@ export function StatusEffectItem({ id, label, icon, index, onDeleteStatusEffect 
             </div>
 
             <div className="b5e:status-effect-settings" data-visibility={showDetails ? "shown" : "hidden"}>
-                <div>
-                    <input type="hidden" name={`[${index}].id`} value={id} />
-                    <div className="form-group">
-                        <label htmlFor={`[${index}].label`}>{statusEffectItemLabel}</label>
-                        <div className="form-fields">
-                            <input
-                                name={`[${index}].label`}
-                                type="text"
-                                value={statusEffectLabel}
-                                onChange={event => setStatusEffectLabel(event.target.value)}
-                            />
-                        </div>
-                    </div>
+                <TabSet>
+                    <Tab title="Details" icon="fa-book" selected>
+                        <div>
+                            <input type="hidden" name={`[${index}].id`} value={id} />
+                            <div className="form-group">
+                                <label htmlFor={`[${index}].label`}>{statusEffectItemLabel}</label>
+                                <div className="form-fields">
+                                    <input
+                                        name={`[${index}].label`}
+                                        type="text"
+                                        value={statusEffectLabel}
+                                        onChange={event => setStatusEffectLabel(event.target.value)}
+                                    />
+                                </div>
+                            </div>
 
-                    <div className="form-group">
-                        <label htmlFor={`[${index}].icon`}>{statusEffectItemIcon}</label>
-                        <div className="form-fields">
-                            <FilePicker id={`[${index}].icon`} type="image" value={icon} onChange={setStatusEffectIcon} />
+                            <div className="form-group">
+                                <label htmlFor={`[${index}].icon`}>{statusEffectItemIcon}</label>
+                                <div className="form-fields">
+                                    <FilePicker id={`[${index}].icon`} type="image" value={icon} onChange={setStatusEffectIcon} />
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                    </Tab>
+                    <Tab title="Effects" icon="fa-cogs">
+                        <div></div>
+                    </Tab>
+                </TabSet>
             </div>
         </div>
     );

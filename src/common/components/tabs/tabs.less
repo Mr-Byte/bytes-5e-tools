@@ -1,0 +1,36 @@
+.b5e\:tab-set {
+  display: grid;
+  grid-template-rows: 1fr auto;
+
+  .b5e\:tab-item-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+    .b5e\:tab-item {
+      width: 100%;
+      align-self: end;
+      justify-self: center;
+      text-align: center;
+      cursor: pointer;
+      grid-row: 1;
+      display: block;
+      border-top: 1px solid #c9c7b8;
+      border-bottom: 1px solid #c9c7b8;
+      padding: 8px;
+
+      &:hover,
+      &[data-selected="true"] {
+        text-shadow: 0 0 10px red;
+      }
+    }
+  }
+
+  .b5e\:tab-panel {
+    display: none;
+
+    &[data-selected="true"] {
+      display: block;
+    }
+  }
+}
