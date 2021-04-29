@@ -21,6 +21,15 @@ export function StatusEffectItem({ id, label, icon, index, onDeleteStatusEffect 
 
     const toggleDetails = () => setShowDetails(!showDetails);
 
+    const updateStatusEffectLabel = (event: React.ChangeEvent<HTMLInputElement>) => {
+        event.preventDefault();
+
+        const value = event.target.value;
+        console.log(value);
+
+        setStatusEffectLabel(value);
+    };
+
     return (
         <div className="b5e:status-effect">
             <img className="b5e:status-effect-icon" src={statusEffectIcon} onClick={toggleDetails} />
@@ -45,7 +54,7 @@ export function StatusEffectItem({ id, label, icon, index, onDeleteStatusEffect 
                                         name={`[${index}].label`}
                                         type="text"
                                         value={statusEffectLabel}
-                                        onChange={event => setStatusEffectLabel(event.target.value)}
+                                        onChange={updateStatusEffectLabel}
                                     />
                                 </div>
                             </div>

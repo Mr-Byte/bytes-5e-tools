@@ -13,12 +13,14 @@ export abstract class ReactFormApplication<TProps extends object> extends FormAp
     abstract get component(): React.JSXElementConstructor<TProps>;
     abstract getData(): TProps | Promise<TProps>;
 
-    async _render(force?: boolean, options?: Application.RenderOptions) {
-        await super._render(force, options);
+    async _renderInner(data: TProps, options?: Application.RenderOptions) {
+        const html = await super._renderInner(data, options);
+        const container = html.find(".b5e\\:react-container").first()[0];
 
-        const container = document.getElementById("container");
         if (container) {
-            render(<this.component {...await this.getData()} />, container)
+            render(<this.component {...data} />, container)
         }
+
+        return html;
     }
 }
