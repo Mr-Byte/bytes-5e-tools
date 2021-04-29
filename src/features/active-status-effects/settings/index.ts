@@ -1,8 +1,8 @@
+import { cloneDeep, memoize, set } from 'lodash-es';
+import { modKey, MODULE_CONFIG } from '../../../config';
+import { ReactFormApplication } from '../../../common/components';
+import { SettingsForm, SettingsFormProps } from './components/StatusEffectSettingsForm';
 import type { StatusEffect } from "../types";
-import { cloneDeep, memoize, set } from "lodash-es";
-import { MODULE_CONFIG, modKey } from "../../../config";
-import { SettingsForm, SettingsFormProps } from "./components/StatusEffectSettingsForm";
-import { ReactFormApplication } from "../../../common/components";
 
 export class ActiveStatusEffectsSettings extends ReactFormApplication<SettingsFormProps> {
     private static defaultStatusEffects: StatusEffect[];

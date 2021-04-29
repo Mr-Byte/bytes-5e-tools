@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { TabProps } from "./Tab";
-import { Label } from "../";
-import "./tabs.less";
+import React, { useEffect, useState } from 'react';
+import { Label } from '../';
+import { TabProps } from './Tab';
+import './tabs.less';
 
 export interface TabSetProps {
     children: React.ReactElement<TabProps>[];
@@ -22,11 +22,19 @@ export function TabSet({ children }: TabSetProps) {
         });
 
         setTabs(newTabs);
-    }, [selectedTab]);
+    }, [selectedTab, tabs]);
 
     // @ts-ignore This is broken in TS 4.1.
     const tabItems = tabs.map(({ props: { title, icon, selected } }, index) =>
-        <Label className="b5e:tab-item" key={title} icon={icon} data-selected={selected} onClick={() => setSelectedTab(index)}>{title}</Label>
+        <Label
+            className="b5e:tab-item"
+            key={title}
+            icon={icon}
+            data-selected={selected}
+            onClick={() => setSelectedTab(index)}
+        >
+            {title}
+        </Label>
     );
 
     return (
