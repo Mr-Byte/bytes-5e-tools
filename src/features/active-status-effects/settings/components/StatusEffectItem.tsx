@@ -25,7 +25,6 @@ export function StatusEffectItem({ id, label, icon, index, onDeleteStatusEffect 
         event.preventDefault();
 
         const value = event.target.value;
-        console.log(value);
 
         setStatusEffectLabel(value);
     };
@@ -44,7 +43,7 @@ export function StatusEffectItem({ id, label, icon, index, onDeleteStatusEffect 
 
             <div className="b5e:status-effect-settings" data-visibility={showDetails ? "shown" : "hidden"}>
                 <TabSet>
-                    <Tab title="Details" icon="fa-book" selected>
+                    <Tab title="Details" icon="fa-book">
                         <div>
                             <input type="hidden" name={`[${index}].id`} value={id} />
                             <div className="form-group">
