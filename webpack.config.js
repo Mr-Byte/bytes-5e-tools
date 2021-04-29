@@ -1,10 +1,12 @@
 const path = require('path');
 const TerserPlugin = require("terser-webpack-plugin");
+const MinCSSExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
     entry: './src/module.ts',
     devtool: 'inline-source-map',
     mode: 'production',
+    plugins: [new MinCSSExtractPlugin()],
     module: {
         rules: [
             {
@@ -17,20 +19,9 @@ module.exports = {
                 exclude: /node_modules/,
                 sideEffects: true,
                 use: [
-                    {
-                        loader: "style-loader",
-                    },
-                    {
-                        loader: "css-loader",
-                    },
-                    {
-                        loader: "less-loader",
-                        options: {
-                            lessOptions: {
-                                strictMath: true,
-                            },
-                        },
-                    },
+                    MinCSSExtractPlugin.loader,
+                    "css-loader",
+                    "less-loader",
                 ]
             }
         ],
