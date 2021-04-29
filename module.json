@@ -14,7 +14,6 @@
     }
   ],
   "scripts": ["dist/mod.js"],
-  "styles": ["dist/main.css"],
   "templates": ["templates/settings/active-status-effects.hbs"],
   "url": "https://github.com/Mr-Byte/bytes-5e-tools",
   "manifest": "https://raw.githubusercontent.com/Mr-Byte/bytes-5e-tools/main/module.json",

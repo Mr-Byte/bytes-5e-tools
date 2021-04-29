@@ -6,8 +6,8 @@ export interface TabProps {
 
 export function Tab({ children }: TabProps) {
     return (
-        <div>
+        <>
             {children}
-        </div>
+        </>
     );
 }
