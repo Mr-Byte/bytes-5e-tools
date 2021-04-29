@@ -1,5 +1,3 @@
-import React from "react";
-
 export interface TabProps {
     children: React.ReactNode;
     title: string;

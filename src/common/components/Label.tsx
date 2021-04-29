@@ -1,5 +1,4 @@
-import React from "react";
-import { Icon } from "./Icon";
+import { Icon } from './Icon';
 
 export interface LabelProps {
     icon?: string;

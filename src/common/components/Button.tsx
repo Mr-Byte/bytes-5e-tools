@@ -1,4 +1,4 @@
-import { Label } from "./";
+import { Label } from './';
 
 export const enum ButtonType {
     Submit = "submit",
