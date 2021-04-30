@@ -22,7 +22,7 @@ export class ActiveStatusEffectsSettings extends ReactFormApplication<SettingsFo
     public static get defaultOptions(): FormApplication.Options {
         return {
             ...super.defaultOptions,
-            id: modKey("active-status-effects.settings"),
+            id: "ActiveStatusEffectsSettings",
             title: modKey("active-status-effects.settings.title"),
             width: 525,
             height: 400,

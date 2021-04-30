@@ -1,7 +1,9 @@
 import { render } from 'react-dom';
 import { template } from '../../config';
 
-export abstract class ReactFormApplication<TProps extends object> extends FormApplication<FormApplication.Options, TProps> {
+export abstract class ReactFormApplication<TProps extends object>
+    extends FormApplication<FormApplication.Options, TProps> {
+
     public static get defaultOptions(): FormApplication.Options {
         return {
             ...super.defaultOptions,
