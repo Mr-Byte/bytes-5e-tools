@@ -1,24 +1,24 @@
 {
-  "name": "bytes-5e-tools",
-  "title": "Byte's 5e Tools",
-  "description": "",
-  "author": "MrByte",
-  "version": "0.1.0",
-  "minimumCoreVersion": "0.7.9",
-  "compatibleCoreVersion": "0.7.9",
-  "languages": [
-    {
-      "lang": "en",
-      "name": "English",
-      "path": "lang/en.json"
-    }
-  ],
-  "scripts": ["dist/mod.js"],
-  "styles": ["dist/main.css"],
-  "templates": ["templates/settings/active-status-effects.hbs"],
-  "url": "https://github.com/Mr-Byte/bytes-5e-tools",
-  "manifest": "https://raw.githubusercontent.com/Mr-Byte/bytes-5e-tools/main/module.json",
-  "bugs": "https://github.com/Mr-Byte/bytes-5e-tools/issues",
-  "allowBugReporter": true,
-  "license": "MIT"
+    "name": "bytes-5e-tools",
+    "title": "Byte's 5e Tools",
+    "description": "",
+    "author": "MrByte",
+    "version": "0.1.0",
+    "minimumCoreVersion": "0.7.9",
+    "compatibleCoreVersion": "0.7.9",
+    "languages": [
+        {
+            "lang": "en",
+            "name": "English",
+            "path": "lang/en.json"
+        }
+    ],
+    "scripts": ["dist/mod.js"],
+    "styles": ["dist/main.css"],
+    "templates": ["templates/react-form.hbs"],
+    "url": "https://github.com/Mr-Byte/bytes-5e-tools",
+    "manifest": "https://raw.githubusercontent.com/Mr-Byte/bytes-5e-tools/main/module.json",
+    "bugs": "https://github.com/Mr-Byte/bytes-5e-tools/issues",
+    "allowBugReporter": true,
+    "license": "MIT"
 }

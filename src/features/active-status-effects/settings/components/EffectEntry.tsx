@@ -13,7 +13,7 @@ export interface EffectEntryProps extends StatusEffect {
 
 export function EffectEntry({ id, label, icon, index, changes, onDelete: onDeleteStatusEffect, }: EffectEntryProps) {
     const effectChanges = useMemo(() => changes?.map(change => ({
-        dataPath: change.key,
+        attributeKey: change.key,
         mode: change.mode.toString(),
         value: (change.value as object)?.toString(),
     })), [changes,]);
@@ -26,10 +26,10 @@ export function EffectEntry({ id, label, icon, index, changes, onDelete: onDelet
 
     return (
         <div className="b5e:status-effect">
-            <img className="b5e:status-effect-icon" src={statusEffectIcon} onClick={toggleDetails} />
-            <div className="b5e:status-effect-name" onClick={toggleDetails}>
-                <h3>{statusEffectLabel}</h3>
-            </div>
+            <a className="b5e:status-effect-header" onClick={toggleDetails}>
+                <img className="b5e:status-effect-icon" src={statusEffectIcon} />
+                <h3 className="b5e:status-effect-name">{statusEffectLabel}</h3>
+            </a>
             <div className="b5e:status-effect-controls">
                 <a title={deleteStatusEffectLabel} onClick={() => onDeleteStatusEffect?.(index)}>
                     <Icon icon="fa-trash" />
@@ -41,15 +41,15 @@ export function EffectEntry({ id, label, icon, index, changes, onDelete: onDelet
                     <Tab title="Details" icon="fa-book">
                         <Details
                             id={id}
-                            index={index}
                             label={statusEffectLabel}
                             icon={statusEffectIcon}
+                            formPath={`[${index}]`}
                             onIconChange={setStatusEffectIcon}
                             onLabelChange={setStatusEffectLabel}
                         />
                     </Tab>
                     <Tab title="Effects" icon="fa-cogs">
-                        <Changes changes={effectChanges ?? []} path={`[${index}].changes`} />
+                        <Changes changes={effectChanges ?? []} formPath={`[${index}].changes`} />
                     </Tab>
                 </TabSet>
             </div>

@@ -18,20 +18,20 @@ function useTranslations() {
     const resetDefaultsLabel = useTranslation(modKey("label.reset-defaults"));
     const resetWarningText = useTranslation(modKey("active-status-effects.settings.reset-warning"));
     const newEffectLabel = useTranslation(modKey("active-status-effects.settings.label.status-effect-new"));
-    const okLabel = useTranslation(modKey("label.ok"));
-    const cancelLabel = useTranslation(modKey("label.cancel"));
+    const yes = useTranslation("Yes");
+    const no = useTranslation("No");
 
     return {
         resetDefaultsLabel,
         resetWarningText,
         newEffectLabel,
-        okLabel,
-        cancelLabel,
+        yes,
+        no,
     }
 }
 
 export function SettingsForm(props: SettingsFormProps) {
-    const { resetDefaultsLabel, resetWarningText, newEffectLabel, okLabel, cancelLabel, } = useTranslations();
+    const translations = useTranslations();
     const [statusEffects, setStatusEffects,] = useState(keyElements(props.statusEffects));
     const scrollToEndRef = useRef(false);
 
@@ -40,7 +40,7 @@ export function SettingsForm(props: SettingsFormProps) {
             ...statusEffects,
             {
                 id: randomID(),
-                label: newEffectLabel,
+                label: translations.newEffectLabel,
                 icon: "icons/svg/aura.svg",
                 key: randomID(),
             },
@@ -55,20 +55,20 @@ export function SettingsForm(props: SettingsFormProps) {
 
     const onResetStatusEffects = () => {
         const dialog = new Dialog({
-            title: resetDefaultsLabel,
-            content: resetWarningText,
+            title: translations.resetDefaultsLabel,
+            content: translations.resetWarningText,
             buttons: {
-                ok: {
-                    label: okLabel,
+                yes: {
+                    label: translations.yes,
                     callback: () => {
                         setStatusEffects(keyElements(cloneDeep(props.defaultStatusEffects)));
                     },
                 },
-                cancel: {
-                    label: cancelLabel,
+                no: {
+                    label: translations.no,
                 },
             },
-            default: "cancel",
+            default: "no",
         });
 
         dialog.render(true);

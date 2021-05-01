@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Icon } from "../../../../common/components";
 import { useTranslation } from "../../../../common/react/hooks";
 import { whenChanged } from "../../../../common/react/whenChanged";
 
 export interface ChangeProps extends EffectChange {
     path: string;
+    onDelete?: () => void;
 }
 
 export interface EffectChange {
@@ -16,9 +17,9 @@ export interface EffectChange {
 export function useTranslations() {
     return {
         effectModeCustom: useTranslation("EFFECT.MODE_CUSTOM"),
-        effectModeMultiply: useTranslation("EFFECT.MULTIPLY"),
-        effectModeAdd: useTranslation("EFFECT.ADD"),
-        effectModeDowngrade: useTranslation("EFFECT.DOWNGRADE"),
+        effectModeMultiply: useTranslation("EFFECT.MODE_MULTIPLY"),
+        effectModeAdd: useTranslation("EFFECT.MODE_ADD"),
+        effectModeDowngrade: useTranslation("EFFECT.MODE_DOWNGRADE"),
         effectModeUpgrade: useTranslation("EFFECT.MODE_UPGRADE"),
         effectModeOverride: useTranslation("EFFECT.MODE_OVERRIDE"),
         delete: useTranslation("Delete"),
@@ -51,7 +52,7 @@ export function Change(props: ChangeProps) {
                 <input name={`${path}.value`} type="text" value={value} onChange={whenChanged(setValue)} />
             </div>
             <div className="effect-controls">
-                <a title={translations.delete}>
+                <a title={translations.delete} onClick={() => props.onDelete?.()}>
                     <Icon icon="fa-trash" />
                 </a>
             </div>

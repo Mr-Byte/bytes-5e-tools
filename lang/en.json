@@ -1,16 +1,12 @@
 {
-  "bytes-5e-tools.active-status-effects.settings.title": "Manage Active Status Effects",
-  "bytes-5e-tools.active-status-effects.settings.name": "Active Status Effects",
-  "bytes-5e-tools.active-status-effects.settings.label.manage": "Manage Status Effects",
-  "bytes-5e-tools.active-status-effects.settings.create-label": "Create Status Effect",
-  "bytes-5e-tools.active-status-effects.settings.delete-label": "Delete Status Effect",
-  "bytes-5e-tools.active-status-effects.settings.reset-warning": "<p>Are you sure you want to discard all changes and reset to the default status effects?</p>",
-  "bytes-5e-tools.active-status-effects.settings.label.status-effect-label": "Status Effect Label",
-  "bytes-5e-tools.active-status-effects.settings.label.status-effect-icon": "Status Effect Icon",
-  "bytes-5e-tools.active-status-effects.settings.label.status-effect-new": "New Effect",
-  "bytes-5e-tools.label.save-changes": "Save Changes",
-  "bytes-5e-tools.label.reset-defaults": "Reset Defaults",
-  "bytes-5e-tools.label.add": "Add",
-  "bytes-5e-tools.label.ok": "Ok",
-  "bytes-5e-tools.label.cancel": "Cancel"
+    "bytes-5e-tools.active-status-effects.settings.title": "Manage Active Status Effects",
+    "bytes-5e-tools.active-status-effects.settings.name": "Active Status Effects",
+    "bytes-5e-tools.active-status-effects.settings.label.manage": "Manage Status Effects",
+    "bytes-5e-tools.active-status-effects.settings.create-label": "Create Status Effect",
+    "bytes-5e-tools.active-status-effects.settings.delete-label": "Delete Status Effect",
+    "bytes-5e-tools.active-status-effects.settings.reset-warning": "<p>Are you sure you want to discard all changes and reset to the default status effects?</p>",
+    "bytes-5e-tools.active-status-effects.settings.label.status-effect-new": "New Effect",
+    "bytes-5e-tools.label.save-changes": "Save Changes",
+    "bytes-5e-tools.label.reset-defaults": "Reset Defaults",
+    "bytes-5e-tools.label.add": "Add"
 }

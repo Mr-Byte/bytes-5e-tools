@@ -1,144 +1,146 @@
 @effect-icon-size: 32px;
 
 .b5e\:active-status-effect-settings {
-  display: grid;
-  grid-template-rows: 1fr 18fr 1fr;
-  row-gap: 4px;
-  height: 100%;
-
-  header.b5e\:active-status-effect-settings-header {
-    border-bottom: 1px solid #782e22;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 18fr 1fr;
+    row-gap: 4px;
+    height: 100%;
 
-    > h2 {
-      justify-self: left;
-      align-self: end;
-      border-bottom: none;
-      padding: 0;
-      margin: 0;
-    }
+    header.b5e\:active-status-effect-settings-header {
+        border-bottom: 1px solid #782e22;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
 
-    > a {
-      justify-self: right;
-      align-self: end;
-
-      > h2 {
-        border-bottom: none;
-        padding: 0;
-        margin: 0;
-      }
-    }
-  }
-
-  .b5e\:status-effects-container {
-    overflow: auto;
-
-    .b5e\:status-effect {
-      display: grid;
-      grid-template-columns: @effect-icon-size auto 32px;
-      grid-template-rows: auto auto;
-      border-bottom: 1px solid #c9c7b8;
-      column-gap: 4px;
-      row-gap: 4px;
-      padding-top: 4px;
-      overflow: hidden;
-
-      img.b5e\:status-effect-icon {
-        border: none;
-        width: auto;
-        height: auto;
-        justify-self: center;
-        align-self: center;
-        padding: 2px 0 2px 0;
-        cursor: pointer;
-      }
-
-      div.b5e\:status-effect-name {
-        justify-self: left;
-        align-self: center;
-        cursor: pointer;
-
-        h3 {
-          padding: 0;
-          margin: 0;
-        }
-      }
-
-      div.b5e\:status-effect-controls {
-        justify-self: center;
-        align-self: center;
-      }
-
-      div.b5e\:status-effect-settings {
-        grid-column: 1 / span 3;
-        padding: 0px;
-
-        &[data-visibility="hidden"] {
-          height: 0px;
+        > h2 {
+            justify-self: left;
+            align-self: end;
+            border-bottom: none;
+            padding: 0;
+            margin: 0;
         }
 
-        &[data-visibility="shown"] {
-          height: auto;
-        }
-      }
+        > a {
+            justify-self: right;
+            align-self: end;
 
-      .b5e\:status-effect-changes {
-        margin-top: 2px;
-        margin-bottom: 2px;
-
-        header {
-          height: 28px;
-          background: rgba(0, 0, 0, 0.1);
-          border: 1px solid #7a7971;
-          font-weight: bold;
-
-          .key {
-            padding-left: 4px;
-          }
-
-          .mode {
-            padding: 0 2px;
-          }
-
-          .value {
-            padding: 0 2px;
-          }
-        }
-
-        .b5e\:status-effect-change {
-          align-items: center;
-          padding: 3px 1px;
-
-          .key {
-            flex: 2;
-          }
-
-          .mode {
-            flex: 1;
-            padding: 0 4px;
-
-            select {
-              width: 100%;
+            > h2 {
+                border-bottom: none;
+                padding: 0;
+                margin: 0;
             }
-          }
-
-          .value {
-            flex: 1;
-          }
-
-          .effect-controls {
-            flex: 0 0 24px;
-            text-align: center;
-          }
         }
-      }
     }
-  }
 
-  footer {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 2px;
-  }
+    .b5e\:status-effects-container {
+        overflow: auto;
+
+        .b5e\:status-effect {
+            display: grid;
+            grid-template-columns: auto 32px;
+            grid-template-rows: auto auto;
+            border-bottom: 1px solid #c9c7b8;
+            column-gap: 4px;
+            row-gap: 4px;
+            padding-top: 4px;
+            overflow: hidden;
+
+            a.b5e\:status-effect-header {
+                justify-self: left;
+                align-self: center;
+                display: grid;
+                grid-template-columns: @effect-icon-size auto;
+
+                img.b5e\:status-effect-icon {
+                    border: none;
+                    width: auto;
+                    height: auto;
+                    margin: 2px 0 2px 0;
+                    justify-self: center;
+                    align-self: center;
+                }
+
+                h3.b5e\:status-effect-name {
+                    padding: 0 0 0 4px;
+                    margin: 0;
+                    justify-self: left;
+                    align-self: center;
+                }
+            }
+
+            div.b5e\:status-effect-controls {
+                justify-self: center;
+                align-self: center;
+            }
+
+            div.b5e\:status-effect-settings {
+                grid-column: 1 / span 2;
+                padding: 0px;
+
+                &[data-visibility="hidden"] {
+                    height: 0px;
+                }
+
+                &[data-visibility="shown"] {
+                    height: auto;
+                }
+            }
+
+            .b5e\:status-effect-changes {
+                margin-top: 2px;
+                margin-bottom: 2px;
+
+                header {
+                    height: 28px;
+                    background: rgba(0, 0, 0, 0.1);
+                    border: 1px solid #7a7971;
+                    font-weight: bold;
+
+                    .key {
+                        padding-left: 4px;
+                    }
+
+                    .mode {
+                        padding: 0 2px;
+                    }
+
+                    .value {
+                        padding: 0 2px;
+                    }
+                }
+
+                .b5e\:status-effect-change {
+                    align-items: center;
+                    padding: 3px 1px;
+
+                    .key {
+                        flex: 2;
+                    }
+
+                    .mode {
+                        flex: 1;
+                        padding: 0 8px;
+
+                        select {
+                            width: 100%;
+                        }
+                    }
+
+                    .value {
+                        flex: 1;
+                    }
+
+                    .effect-controls {
+                        flex: 0 0 24px;
+                        text-align: center;
+                    }
+                }
+            }
+        }
+    }
+
+    footer {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 2px;
+    }
 }
