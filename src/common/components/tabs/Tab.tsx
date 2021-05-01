@@ -4,7 +4,7 @@ export interface TabProps {
     icon?: string;
 }
 
-export function Tab({ children }: TabProps) {
+export function Tab({ children, }: TabProps) {
     return (
         <>
             {children}

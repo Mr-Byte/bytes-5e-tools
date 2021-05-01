@@ -1,7 +1,7 @@
 import * as foundry from '../foundry';
 import { localize } from '../localization';
 import { useEffect, useRef, useState } from 'react';
-import { useTranslation } from '../hooks';
+import { useTranslation } from '../react/hooks';
 
 export interface FilePickerProps {
     id: string;
@@ -10,9 +10,9 @@ export interface FilePickerProps {
     onChange?: (_file: string) => void;
 }
 
-export function FilePicker({ id, type, value, onChange }: FilePickerProps) {
+export function FilePicker({ id, type, value, onChange, }: FilePickerProps) {
     const tooltip = useTranslation(localize("FILES.BrowseTooltip"));
-    const [file, setFile] = useState(value);
+    const [file, setFile,] = useState(value);
     const inputRef = useRef<HTMLInputElement>(null);
     const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -25,7 +25,7 @@ export function FilePicker({ id, type, value, onChange }: FilePickerProps) {
                 onChange?.(newFile);
             }
         }
-    }, [inputRef, onChange]);
+    }, [inputRef, onChange,]);
 
     useEffect(() => {
         const current = buttonRef.current;
@@ -34,7 +34,7 @@ export function FilePicker({ id, type, value, onChange }: FilePickerProps) {
             const filePicker = foundry.FilePicker.fromButton(current);
             current.onclick = () => filePicker.browse();
         }
-    }, [buttonRef]);
+    }, [buttonRef,]);
 
     return (
         <>

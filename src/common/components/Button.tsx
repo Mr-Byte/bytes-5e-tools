@@ -1,7 +1,9 @@
 import { Label } from './';
 
 export const enum ButtonType {
+    // eslint-disable-next-line no-unused-vars
     Submit = "submit",
+    // eslint-disable-next-line no-unused-vars
     Button = "button"
 }
 
@@ -13,7 +15,7 @@ export interface ButtonProps {
     onClick?: () => void;
 }
 
-export function Button({ type, name, icon, children, onClick }: ButtonProps) {
+export function Button({ type, name, icon, children, onClick, }: ButtonProps) {
     return (
         <button type={type} name={name} onClick={onClick}>
             <Label icon={icon}>

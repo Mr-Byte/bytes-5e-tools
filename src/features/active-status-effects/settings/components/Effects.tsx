@@ -1,5 +1,5 @@
 import { EffectEntry } from './EffectEntry';
-import { Keyed } from '../../../../common/keyed';
+import { Keyed } from '../../../../common/react/keyed';
 import { MutableRefObject, useEffect, useRef } from 'react';
 import { StatusEffect } from '../../types';
 
@@ -9,7 +9,7 @@ export interface EffectsProps {
     onDelete?: (_index: number) => void;
 }
 
-export function Effects({ statusEffects, scrollToEndRef, onDelete }: EffectsProps) {
+export function Effects({ statusEffects, scrollToEndRef, onDelete, }: EffectsProps) {
     const statusEffectsContainerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -18,7 +18,7 @@ export function Effects({ statusEffects, scrollToEndRef, onDelete }: EffectsProp
 
             current?.scrollTo({
                 top: current?.scrollHeight,
-                behavior: "smooth"
+                behavior: "smooth",
             });
 
             scrollToEndRef.current = false;
@@ -37,7 +37,7 @@ export function Effects({ statusEffects, scrollToEndRef, onDelete }: EffectsProp
                     />
                 )
             }
-            <div style={{ height: "10px" }}></div>
+            <div style={{ height: "10px", }}></div>
         </div>
     );
 }

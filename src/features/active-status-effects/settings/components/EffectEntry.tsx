@@ -1,20 +1,27 @@
-import { useState } from "react";
-import { useTranslation } from "../../../../common/hooks";
+import { useMemo, useState } from "react";
+import { useTranslation } from "../../../../common/react/hooks";
 import { Icon, TabSet, Tab } from "../../../../common/components";
 import { Details } from "./Details";
+import { Changes } from "./Changes";
+import { StatusEffect } from "../../types";
+import { modKey } from "../../../../config";
 
-export interface EffectEntryProps {
-    id: string;
-    label: string;
-    icon: string;
+export interface EffectEntryProps extends StatusEffect {
     index: number;
     onDelete?: (_index: number) => void;
 }
 
-export function EffectEntry({ id, label, icon, index, onDelete: onDeleteStatusEffect }: EffectEntryProps) {
-    const [showDetails, setShowDetails] = useState(false);
-    const [statusEffectIcon, setStatusEffectIcon] = useState(icon);
-    const [statusEffectLabel, setStatusEffectLabel] = useState(useTranslation(label));
+export function EffectEntry({ id, label, icon, index, changes, onDelete: onDeleteStatusEffect, }: EffectEntryProps) {
+    const effectChanges = useMemo(() => changes?.map(change => ({
+        dataPath: change.key,
+        mode: change.mode.toString(),
+        value: (change.value as object)?.toString(),
+    })), [changes,]);
+
+    const [showDetails, setShowDetails,] = useState(false);
+    const [statusEffectIcon, setStatusEffectIcon,] = useState(icon);
+    const [statusEffectLabel, setStatusEffectLabel,] = useState(useTranslation(label));
+    const deleteStatusEffectLabel = useTranslation(modKey("active-status-effects.settings.delete-label"));
     const toggleDetails = () => setShowDetails(!showDetails);
 
     return (
@@ -24,7 +31,7 @@ export function EffectEntry({ id, label, icon, index, onDelete: onDeleteStatusEf
                 <h3>{statusEffectLabel}</h3>
             </div>
             <div className="b5e:status-effect-controls">
-                <a title="Delete Status Effect" onClick={() => onDeleteStatusEffect?.(index)}>
+                <a title={deleteStatusEffectLabel} onClick={() => onDeleteStatusEffect?.(index)}>
                     <Icon icon="fa-trash" />
                 </a>
             </div>
@@ -42,7 +49,7 @@ export function EffectEntry({ id, label, icon, index, onDelete: onDeleteStatusEf
                         />
                     </Tab>
                     <Tab title="Effects" icon="fa-cogs">
-                        <div></div>
+                        <Changes changes={effectChanges ?? []} path={`[${index}].changes`} />
                     </Tab>
                 </TabSet>
             </div>

@@ -7,7 +7,7 @@ export abstract class ReactFormApplication<TProps extends object>
     public static get defaultOptions(): FormApplication.Options {
         return {
             ...super.defaultOptions,
-            template: template("react-form.hbs")
+            template: template("react-form.hbs"),
         }
     }
 

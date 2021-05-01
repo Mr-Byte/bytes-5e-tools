@@ -1,6 +1,6 @@
 import { FilePicker } from '../../../../common/components';
 import { modKey } from '../../../../config';
-import { useTranslation } from '../../../../common/hooks';
+import { useTranslation } from '../../../../common/react/hooks';
 
 export interface DetailsProps {
     id: string;
@@ -12,7 +12,7 @@ export interface DetailsProps {
     onIconChange?: (_value: string) => void;
 }
 
-export function Details({ id, label, icon, index, onIconChange, onLabelChange }: DetailsProps) {
+export function Details({ id, label, icon, index, onIconChange, onLabelChange, }: DetailsProps) {
     const statusEffectItemLabel = useTranslation(modKey("active-status-effects.settings.label.status-effect-label"));
     const statusEffectItemIcon = useTranslation(modKey("active-status-effects.settings.label.status-effect-icon"));
 

@@ -2,11 +2,11 @@ import { cloneDeep } from 'lodash-es';
 import { Effects } from './Effects';
 import { Footer } from './Footer';
 import { Header } from './Header';
-import { keyElements } from '../../../../common/keyed';
+import { keyElements } from '../../../../common/react/keyed';
 import { modKey } from '../../../../config';
 import { StatusEffect } from '../../types';
 import { useRef, useState } from 'react';
-import { useTranslation } from '../../../../common/hooks';
+import { useTranslation } from '../../../../common/react/hooks';
 import './style.less';
 
 export interface SettingsFormProps {
@@ -26,13 +26,13 @@ function useTranslations() {
         resetWarningText,
         newEffectLabel,
         okLabel,
-        cancelLabel
+        cancelLabel,
     }
 }
 
 export function SettingsForm(props: SettingsFormProps) {
-    const { resetDefaultsLabel, resetWarningText, newEffectLabel, okLabel, cancelLabel } = useTranslations();
-    const [statusEffects, setStatusEffects] = useState(keyElements(props.statusEffects));
+    const { resetDefaultsLabel, resetWarningText, newEffectLabel, okLabel, cancelLabel, } = useTranslations();
+    const [statusEffects, setStatusEffects,] = useState(keyElements(props.statusEffects));
     const scrollToEndRef = useRef(false);
 
     const onAddStatusEffect = () => {
@@ -42,8 +42,8 @@ export function SettingsForm(props: SettingsFormProps) {
                 id: randomID(),
                 label: newEffectLabel,
                 icon: "icons/svg/aura.svg",
-                key: randomID()
-            }
+                key: randomID(),
+            },
         ]);
 
         scrollToEndRef.current = true;
@@ -62,13 +62,13 @@ export function SettingsForm(props: SettingsFormProps) {
                     label: okLabel,
                     callback: () => {
                         setStatusEffects(keyElements(cloneDeep(props.defaultStatusEffects)));
-                    }
+                    },
                 },
                 cancel: {
-                    label: cancelLabel
-                }
+                    label: cancelLabel,
+                },
             },
-            default: "cancel"
+            default: "cancel",
         });
 
         dialog.render(true);

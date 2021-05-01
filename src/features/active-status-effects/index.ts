@@ -19,14 +19,14 @@ export class ActiveStatusEffects implements Feature {
         game.settings.register(MODULE_CONFIG.NAME, "statusEffects", {
             scope: "world",
             config: false,
-            onChange: () => void this.overrideStatusEffects()
+            onChange: () => void this.overrideStatusEffects(),
         });
     }
 
     private registerHooks(): void {
         Hooks.on("ready", () => void this.overrideStatusEffects());
         Hooks.on("preCreateActiveEffect", (_: unknown, effect: StatusEffect) => {
-            [effect.icon] = effect.icon.split("#");
+            [effect.icon,] = effect.icon.split("#");
         });
     }
 

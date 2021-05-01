@@ -5,10 +5,8 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
     entry: './src/module.ts',
-    devtool: 'inline-source-map',
     mode: 'production',
     plugins: [new MiniCSSExtractPlugin(), new ESLintPlugin()],
-    devtool: "inline-source-map",
     module: {
         rules: [
             {

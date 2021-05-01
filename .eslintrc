@@ -1,6 +1,8 @@
 {
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
+  "plugins": [
+    "@typescript-eslint"
+  ],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
@@ -8,16 +10,47 @@
     "plugin:react-hooks/recommended"
   ],
   "rules": {
-    "array-bracket-newline": ["error", "consistent"],
-    "array-element-newline": ["error", "consistent"],
-    "indent": ["error", 4, { "SwitchCase": 1 }],
+    "array-bracket-newline": [
+      "error",
+      "consistent"
+    ],
+    "array-element-newline": [
+      "error",
+      "consistent"
+    ],
+    "indent": [
+      "error",
+      4,
+      {
+        "SwitchCase": 1,
+        "CallExpression": {
+          "arguments": 1
+        },
+        "ArrayExpression": "first",
+        "ObjectExpression": "first",
+        "ImportDeclaration": "first"
+      }
+    ],
+    "comma-dangle": [
+      "error",
+      {
+        "arrays": "always",
+        "objects": "always"
+      }
+    ],
     "no-unused-vars": [
       "error",
-      { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }
+      {
+        "varsIgnorePattern": "^_",
+        "argsIgnorePattern": "^_"
+      }
     ],
     "@typescript-eslint/no-unused-vars": [
       "error",
-      { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }
+      {
+        "varsIgnorePattern": "^_",
+        "argsIgnorePattern": "^_"
+      }
     ],
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/require-await": "off",
@@ -25,7 +58,9 @@
     "@typescript-eslint/ban-types": "off",
     "@typescript-eslint/ban-ts-comment": "off"
   },
-  "ignorePatterns": ["**/*.js"],
+  "ignorePatterns": [
+    "**/*.js"
+  ],
   "parserOptions": {
     "sourceType": "module",
     "project": "tsconfig.json"

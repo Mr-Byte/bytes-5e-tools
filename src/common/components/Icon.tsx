@@ -1,7 +1,15 @@
 export interface IconProps {
-    icon?: string;
+    icon: string;
+    type?: string;
 }
 
-export function Icon({ icon }: IconProps) {
-    return icon ? <i className={`fas ${icon}`}></i > : null;
+export const enum IconType {
+    // eslint-disable-next-line no-unused-vars
+    Normal = "fas",
+    // eslint-disable-next-line no-unused-vars
+    Inverted = "far"
+}
+
+export function Icon({ icon, type, }: IconProps) {
+    return <i className={`${type ?? IconType.Normal} ${icon}`}></i >;
 }

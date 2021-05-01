@@ -8,10 +8,10 @@ export interface TabSetProps {
     children: React.ReactElement<TabProps>[];
 }
 
-export function TabSet({ children, defaultTabIndex }: TabSetProps) {
-    const [selectedTab, setSelectedTab] = useState(defaultTabIndex ?? 0);
-    const [tabs, panels] = useMemo(() => [
-        children.map(({ props: { title, icon } }, index) =>
+export function TabSet({ children, defaultTabIndex, }: TabSetProps) {
+    const [selectedTab, setSelectedTab,] = useState(defaultTabIndex ?? 0);
+    const [tabs, panels,] = useMemo(() => [
+        children.map(({ props: { title, icon, }, }, index) =>
             <Label className="b5e:tab-item" key={title} icon={icon} data-selected={selectedTab === index} onClick={() => setSelectedTab(index)}>{title}</Label>
         ),
         children.map((child, index) => {
@@ -20,8 +20,8 @@ export function TabSet({ children, defaultTabIndex }: TabSetProps) {
                     {child}
                 </div>
             )
-        })
-    ], [children, selectedTab]);
+        }),
+    ], [children, selectedTab,]);
 
     return (
         <div className="b5e:tab-set">

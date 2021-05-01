@@ -15,7 +15,7 @@ export function Label({ icon, children, ...rest }: LabelProps) {
                     ? <>
                         <Icon icon={icon} />&nbsp;{children}
                     </>
-                    : { children }
+                    : { children, }
             }
         </span>
     );

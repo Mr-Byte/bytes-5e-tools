@@ -13,7 +13,7 @@ export class ActiveStatusEffectsSettings extends ReactFormApplication<SettingsFo
             label: modKey("active-status-effects.settings.label.manage"),
             restricted: true,
             type: ActiveStatusEffectsSettings,
-            icon: "fas fa-cogs"
+            icon: "fas fa-cogs",
         });
 
         ActiveStatusEffectsSettings.defaultStatusEffects = defaultStatusEffects;
@@ -45,7 +45,7 @@ export class ActiveStatusEffectsSettings extends ReactFormApplication<SettingsFo
 
         const statusEffects: StatusEffect[] = Object.entries(formData)
             .reduce(
-                (statusEffects, [path, value]) => set(statusEffects, path, value),
+                (statusEffects, [path, value,]) => set(statusEffects, path, value),
                 []
             );
 
@@ -60,9 +60,9 @@ export class ActiveStatusEffectsSettings extends ReactFormApplication<SettingsFo
         return {
             statusEffects: cloneDeep(statusEffects).map(statusEffect => ({
                 ...statusEffect,
-                icon: statusEffect.icon.split("#")[0]
+                icon: statusEffect.icon.split("#")[0],
             })),
-            defaultStatusEffects: ActiveStatusEffectsSettings.defaultStatusEffects
+            defaultStatusEffects: ActiveStatusEffectsSettings.defaultStatusEffects,
         };
     });
 
