@@ -1,17 +1,17 @@
+import * as types from '../../types';
 import { cloneDeep } from 'lodash-es';
-import { Effects } from './Effects';
 import { Footer } from './Footer';
 import { Header } from './Header';
+import { StatusEffect } from './StatusEffect';
 import { keyElements } from '../../../../common/react/keyed';
 import { modKey } from '../../../../config';
-import { StatusEffect } from '../../types';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from '../../../../common/react/hooks';
 import './style.less';
 
 export interface SettingsFormProps {
-    statusEffects: StatusEffect[];
-    defaultStatusEffects: StatusEffect[];
+    statusEffects: types.StatusEffect[];
+    defaultStatusEffects: types.StatusEffect[];
 }
 
 function useTranslations() {
@@ -34,6 +34,20 @@ export function SettingsForm(props: SettingsFormProps) {
     const translations = useTranslations();
     const [statusEffects, setStatusEffects,] = useState(keyElements(props.statusEffects));
     const scrollToEndRef = useRef(false);
+    const statusEffectsContainerRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (scrollToEndRef.current) {
+            const current = statusEffectsContainerRef.current;
+
+            current?.scrollTo({
+                top: current?.scrollHeight,
+                behavior: "smooth",
+            });
+
+            scrollToEndRef.current = false;
+        }
+    });
 
     const onAddStatusEffect = () => {
         setStatusEffects((statusEffects) => [
@@ -49,9 +63,8 @@ export function SettingsForm(props: SettingsFormProps) {
         scrollToEndRef.current = true;
     };
 
-    const onDeleteStatusEffect = (index: number) => {
-        setStatusEffects(statusEffects => statusEffects.filter((_, i) => i !== index));
-    };
+    const onDeleteStatusEffect = (index: number) =>
+        () => setStatusEffects(statusEffects => statusEffects.filter((_, i) => i !== index));
 
     const onResetStatusEffects = () => {
         const dialog = new Dialog({
@@ -77,7 +90,21 @@ export function SettingsForm(props: SettingsFormProps) {
     return (
         <div className="b5e:active-status-effect-settings">
             <Header onAddStatusEffect={onAddStatusEffect} />
-            <Effects statusEffects={statusEffects} onDelete={onDeleteStatusEffect} scrollToEndRef={scrollToEndRef} />
+
+            <div className="b5e:status-effects-container" ref={statusEffectsContainerRef}>
+                {
+                    // @ts-ignore For whatever reason, this is broken in TS 4.1
+                    statusEffects.map((statusEffect, index) =>
+                        <StatusEffect {...statusEffect}
+                            formPath={`[${index}]`}
+                            key={statusEffect.key}
+                            onDelete={onDeleteStatusEffect(index)}
+                        />
+                    )
+                }
+                <div style={{ height: "10px", }}></div>
+            </div>
+
             <Footer onResetStatusEffects={onResetStatusEffects} />
         </div>
     );

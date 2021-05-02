@@ -7,21 +7,21 @@ import { StatusEffect } from "../../types";
 import { modKey } from "../../../../config";
 
 export interface EffectEntryProps extends StatusEffect {
-    index: number;
-    onDelete?: (_index: number) => void;
+    formPath: string;
+    onDelete?: () => void;
 }
 
-export function EffectEntry({ id, label, icon, index, changes, onDelete: onDeleteStatusEffect, }: EffectEntryProps) {
+export function StatusEffect({ id, label, icon, changes, formPath, onDelete, }: EffectEntryProps) {
+    const [showDetails, setShowDetails,] = useState(false);
+    const [statusEffectIcon, setStatusEffectIcon,] = useState(icon);
+    const [statusEffectLabel, setStatusEffectLabel,] = useState(useTranslation(label));
+    const deleteStatusEffectLabel = useTranslation(modKey("active-status-effects.settings.delete-label"));
     const effectChanges = useMemo(() => changes?.map(change => ({
         attributeKey: change.key,
         mode: change.mode.toString(),
         value: (change.value as object)?.toString(),
     })), [changes,]);
 
-    const [showDetails, setShowDetails,] = useState(false);
-    const [statusEffectIcon, setStatusEffectIcon,] = useState(icon);
-    const [statusEffectLabel, setStatusEffectLabel,] = useState(useTranslation(label));
-    const deleteStatusEffectLabel = useTranslation(modKey("active-status-effects.settings.delete-label"));
     const toggleDetails = () => setShowDetails(!showDetails);
 
     return (
@@ -31,7 +31,7 @@ export function EffectEntry({ id, label, icon, index, changes, onDelete: onDelet
                 <h3 className="b5e:status-effect-name">{statusEffectLabel}</h3>
             </a>
             <div className="b5e:status-effect-controls">
-                <a title={deleteStatusEffectLabel} onClick={() => onDeleteStatusEffect?.(index)}>
+                <a title={deleteStatusEffectLabel} onClick={() => onDelete?.()}>
                     <Icon icon="fa-trash" />
                 </a>
             </div>
@@ -43,13 +43,13 @@ export function EffectEntry({ id, label, icon, index, changes, onDelete: onDelet
                             id={id}
                             label={statusEffectLabel}
                             icon={statusEffectIcon}
-                            formPath={`[${index}]`}
+                            formPath={formPath}
                             onIconChange={setStatusEffectIcon}
                             onLabelChange={setStatusEffectLabel}
                         />
                     </Tab>
                     <Tab title="Effects" icon="fa-cogs">
-                        <Changes changes={effectChanges ?? []} formPath={`[${index}].changes`} />
+                        <Changes changes={effectChanges ?? []} formPath={`${formPath}.changes`} />
                     </Tab>
                 </TabSet>
             </div>
