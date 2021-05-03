@@ -7,6 +7,9 @@ import { keyElements } from '../../../../common/react/keyed';
 import { modKey } from '../../../../config';
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from '../../../../common/react/hooks';
+import { TitleBarPortal } from '../../../../common/components/TitleBarPortal';
+import { Label } from '../../../../common/components';
+
 import './style.less';
 
 export interface SettingsFormProps {
@@ -89,6 +92,15 @@ export function SettingsForm(props: SettingsFormProps) {
 
     return (
         <div className="b5e:active-status-effect-settings">
+            <TitleBarPortal parentId="ActiveStatusEffectsSettings">
+                <a>
+                    <Label icon="fa-file-import">Import</Label>
+                </a>
+                <a>
+                    <Label icon="fa-file-export">Export</Label>
+                </a>
+            </TitleBarPortal>
+
             <Header onAddStatusEffect={onAddStatusEffect} />
 
             <div className="b5e:status-effects-container" ref={statusEffectsContainerRef}>
