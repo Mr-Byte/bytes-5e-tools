@@ -50,7 +50,7 @@ export class ActiveStatusEffectsSettings extends ReactFormApplication<SettingsFo
             );
 
         for (const statusEffect of statusEffects) {
-            statusEffect.icon = `${statusEffect.icon}#${statusEffect.id}`;
+            statusEffect.icon = `${statusEffect.icon}#${statusEffect.id}.png`;
         }
 
         await game.settings.set(MODULE_CONFIG.NAME, "statusEffects", statusEffects);

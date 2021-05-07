@@ -13,11 +13,17 @@
             "path": "lang/en.json"
         }
     ],
-    "scripts": ["dist/mod.js"],
-    "styles": ["dist/main.css"],
-    "templates": ["templates/react-form.hbs"],
+    "scripts": [
+        "mod.js"
+    ],
+    "styles": [
+        "main.css"
+    ],
+    "templates": [
+        "templates/react-form.hbs"
+    ],
     "url": "https://github.com/Mr-Byte/bytes-5e-tools",
-    "download": "https://github.com/Mr-Byte/bytes-5e-tools/releases/download/v0.1.0/bytes-5e-tools-0.1.0.zip",
+    "download": "https://github.com/Mr-Byte/bytes-5e-tools/releases/download/v0.1.1/bytes-5e-tools-0.1.1.zip",
     "manifest": "https://raw.githubusercontent.com/Mr-Byte/bytes-5e-tools/main/module.json",
     "bugs": "https://github.com/Mr-Byte/bytes-5e-tools/issues",
     "allowBugReporter": true,

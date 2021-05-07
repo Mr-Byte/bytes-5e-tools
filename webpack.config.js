@@ -2,11 +2,23 @@ const path = require('path');
 const TerserPlugin = require("terser-webpack-plugin");
 const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     entry: './src/module.ts',
     mode: 'production',
-    plugins: [new MiniCSSExtractPlugin(), new ESLintPlugin()],
+    devtool: "inline-source-map",
+    plugins: [
+        new MiniCSSExtractPlugin(),
+        new ESLintPlugin(),
+        new CopyPlugin({
+            patterns: [
+                "templates/**/*",
+                "lang/**/*",
+                "module.json"
+            ]
+        })
+    ],
     module: {
         rules: [
             {
