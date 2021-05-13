@@ -1,5 +1,5 @@
-import { FilePicker } from '../../../../common/components';
-import { useTranslation } from '../../../../common/react/hooks';
+import { useTranslation } from "common/react/hooks";
+import { FilePicker } from "common/components/controls/FilePicker";
 
 export interface DetailsProps {
     id: string;

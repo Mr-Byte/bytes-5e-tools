@@ -1,4 +1,4 @@
-import { Label } from './';
+import { Label } from "common/components/controls/Label";
 
 export const enum ButtonType {
     // eslint-disable-next-line no-unused-vars

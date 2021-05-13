@@ -27,6 +27,7 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "jsx": "react-jsx",
+    "baseUrl": "./src",
   },
   "exclude": [
     "dist/**/*.js",

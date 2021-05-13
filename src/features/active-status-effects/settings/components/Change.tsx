@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Icon } from "../../../../common/components";
-import { useTranslation } from "../../../../common/react/hooks";
-import { whenChanged } from "../../../../common/react/whenChanged";
+import { Icon } from "common/components/controls/Icon";
+import { useTranslation } from "common/react/hooks";
+import { whenChanged } from "common/react/whenChanged";
 
 export interface ChangeProps extends EffectChange {
     path: string;

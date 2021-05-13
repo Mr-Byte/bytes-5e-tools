@@ -1,6 +1,6 @@
-import { Button, ButtonType } from '../../../../common/components';
-import { modKey } from '../../../../config';
-import { useTranslation } from '../../../../common/react/hooks';
+import { Button, ButtonType } from "common/components/controls/Button";
+import { useTranslation } from "common/react/hooks";
+import { modKey } from "config";
 
 export interface FooterProps {
     onResetStatusEffects?: () => void;

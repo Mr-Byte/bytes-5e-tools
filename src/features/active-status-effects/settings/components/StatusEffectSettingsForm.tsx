@@ -1,16 +1,16 @@
-import * as types from '../../types';
-import { cloneDeep } from 'lodash-es';
-import { Footer } from './Footer';
-import { Header } from './Header';
-import { StatusEffect } from './StatusEffect';
-import { keyElements } from '../../../../common/react/keyed';
-import { modKey } from '../../../../config';
-import { useEffect, useRef, useState } from 'react';
-import { useTranslation } from '../../../../common/react/hooks';
-import { TitleBarPortal } from '../../../../common/components/TitleBarPortal';
-import { Label } from '../../../../common/components';
+import * as types from "features/active-status-effects/types";
+import { cloneDeep } from "lodash-es";
+import { Footer } from "features/active-status-effects/settings/components/Footer";
+import { Header } from "features/active-status-effects/settings/components/Header";
+import { StatusEffect } from "features/active-status-effects/settings/components/StatusEffect";
+import { keyElements } from "common/react/keyed";
+import { modKey } from "config";
+import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "common/react/hooks";
+import { TitleBarPortal } from "common/components/view/TitleBarPortal";
+import { Label } from "common/components/controls/Label";
 
-import './style.less';
+import "./style.less";
 
 export interface SettingsFormProps {
     statusEffects: types.StatusEffect[];

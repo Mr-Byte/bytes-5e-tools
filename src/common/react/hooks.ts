@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { format, localize } from "../localization";
+import { format, localize } from "common/localization";
 
 export function useTranslation(key: string, data?: Record<string, unknown>): string {
     return useMemo(

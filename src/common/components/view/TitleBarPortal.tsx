@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
+import { useEffect, useState } from "react";
+import ReactDOM from "react-dom";
 
 import "./title-bar.less";
 

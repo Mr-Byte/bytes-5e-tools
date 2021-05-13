@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from "react";
-import { TabProps } from "./Tab";
-import { Label } from "../";
+import { TabProps } from "common/components/controls/tabs";
+import { Label } from "common/components/controls/Label";
+
 import "./tabs.less";
 
 export interface TabSetProps {

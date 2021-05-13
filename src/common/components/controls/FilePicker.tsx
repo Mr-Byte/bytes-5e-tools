@@ -1,7 +1,8 @@
-import * as foundry from '../foundry';
-import { localize } from '../localization';
-import { useEffect, useRef, useState } from 'react';
-import { useTranslation } from '../react/hooks';
+import * as foundry from "common/foundry";
+import { localize } from "common/localization";
+import { useTranslation } from "common/react/hooks";
+
+import { useEffect, useRef, useState } from "react";
 
 export interface FilePickerProps {
     id: string;

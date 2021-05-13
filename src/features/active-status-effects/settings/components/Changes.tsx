@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Icon, IconType } from "../../../../common/components";
-import { useTranslation } from "../../../../common/react/hooks";
-import { Change, EffectChange } from "./Change";
+import { Icon, IconType } from "common/components/controls/Icon";
+import { useTranslation } from "common/react/hooks";
+import { Change, EffectChange } from "features/active-status-effects/settings/components/Change";
 
 export interface ChangesProps {
     formPath: string;

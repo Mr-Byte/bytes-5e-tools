@@ -1,4 +1,4 @@
-import { Icon } from './Icon';
+import { Icon } from "common/components/controls/Icon";
 
 export interface LabelProps {
     icon?: string;

@@ -1,6 +1,6 @@
-import { Label } from '../../../../common/components';
-import { modKey } from '../../../../config';
-import { useTranslation } from '../../../../common/react/hooks';
+import { Label } from "common/components/controls/Label";
+import { modKey } from "config";
+import { useTranslation } from "common/react/hooks";
 
 export interface HeaderProps {
     onAddStatusEffect?: () => void;

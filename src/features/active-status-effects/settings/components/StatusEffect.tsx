@@ -1,10 +1,10 @@
 import { useMemo, useState } from "react";
-import { useTranslation } from "../../../../common/react/hooks";
-import { Icon, TabSet, Tab } from "../../../../common/components";
-import { Details } from "./Details";
-import { Changes } from "./Changes";
-import { StatusEffect } from "../../types";
-import { modKey } from "../../../../config";
+import { useTranslation } from "common/react/hooks";
+import { Icon, TabSet, Tab } from "common/components/controls";
+import { Details } from "features/active-status-effects/settings/components/Details";
+import { Changes } from "features/active-status-effects/settings/components/Changes";
+import { StatusEffect } from "features/active-status-effects/types";
+import { modKey } from "config";
 
 export interface EffectEntryProps extends StatusEffect {
     formPath: string;
